@@ -1,0 +1,497 @@
+/*子元素的float clear vertical-align属性将失效*/
+
+.uf {
+	display: -moz-box;  /* Firefox */ 
+	display: -ms-flexbox;    /* IE10 */ 
+	display: -webkit-box;    /* Safari */  
+	display: -webkit-flex;    /* Chrome, WebKit */ 
+	display: box;  
+	display: flexbox;  
+	display: flex;   
+	width: 100%;  
+}
+.uf-inline {
+	display: -webkit-inline-flex;/*Safari*/
+	display: -moz-inline-flex;
+	display: -ms-inline-flex;
+	display: -o-inline-flex;
+	display: inline-flex;
+}
+
+/*容器的属性*/
+/*flex-direction属性决定主轴的方向（即项目的排列方向）。*/
+.uf-d-r {
+    /* 09版 */
+	-webkit-box-orient: horizontal;
+	box-orient: horizontal;
+	/* 12版 */
+	-webkit-flex-direction: row;
+	-moz-flex-direction: row;
+	-ms-flex-direction: row;
+	-o-flex-direction: row;
+	flex-direction: row;/*（默认值）：主轴为水平方向，起点在左端。*/
+}
+.uf-d-rr {
+	/* 09版 */
+	-webkit-box-orient: horizontal;
+	box-orient: horizontal;
+    -webkit-box-direction:reverse;
+    box-direction:reverse;
+	/* 12版 */
+	-webkit-flex-direction: row-reverse;
+	-moz-flex-direction: row-reverse;
+	-ms-flex-direction: row-reverse;
+	-o-flex-direction: row-reverse;
+	flex-direction: row-reverse;/*主轴为水平方向，起点在右端。*/
+}
+.uf-d-c {
+	/* 09版 */
+	-webkit-box-orient: vertical;
+	box-orient: vertical;
+	/* 12版 */
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
+	flex-direction:column;/*主轴为垂直方向，起点在上沿。*/
+}
+.uf-d-cr {
+	/* 09版 */
+	-webkit-box-orient: vertical;
+	box-orient: vertical;
+    -webkit-box-direction:reverse;
+    box-direction:reverse;
+	/* 12版 */
+	-webkit-flex-direction: column-reverse;
+	-moz-flex-direction: column-reverse;
+	-ms-flex-direction: column-reverse;
+	-o-flex-direction: column-reverse;
+	flex-direction: column-reverse;/*主轴为垂直方向，起点在下沿。*/
+}
+
+/*默认情况下，项目都排在一条线（又称"轴线"）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。*/
+.uf-w-n {
+	-webkit-flex-wrap: nowrap;
+	-moz-flex-wrap: nowrap;
+	-ms-flex-wrap: nowrap;
+	-o-flex-wrap: nowrap;
+	flex-wrap: nowrap;/*（默认）：不换行。*/
+}
+.uf-w-w {
+	/* 09版 */
+	/*-webkit-box-lines: multiple;
+	box-lines: multiple;*/
+	/* 12版 */
+	-webkit-flex-wrap: wrap;
+	-moz-flex-wrap: wrap;
+	-ms-flex-wrap: wrap;
+	-o-flex-wrap: wrap;
+	flex-wrap: wrap;/*换行，第一行在上方。*/
+}
+.uf-w-wr {
+	-webkit-flex-wrap: wrap-reverse;
+	-moz-flex-wrap: wrap-reverse;
+	-ms-flex-wrap: wrap-reverse;
+	-o-flex-wrap: wrap-reverse;
+	flex-wrap: wrap-reverse;/*换行，第一行在下方。*/
+}
+
+/*flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。*/
+.uf-f-rn {
+	-webkit-flex-flow: row nowrap;
+	-moz-flex-flow: row nowrap;
+	-ms-flex-flow: row nowrap;
+	-o-flex-flow: row nowrap;
+	flex-flow: row nowrap;
+}
+.uf-f-rw {
+	-webkit-flex-flow: row wrap;
+	-moz-flex-flow: row wrap;
+	-ms-flex-flow: row wrap;
+	-o-flex-flow: row wrap;
+	flex-flow: row wrap;
+}
+.uf-f-rwr {
+	-webkit-flex-flow: row  wrap-reverse;
+	-moz-flex-flow: row  wrap-reverse;
+	-ms-flex-flow: row  wrap-reverse;
+	-o-flex-flow: row  wrap-reverse;
+	flex-flow: row wrap-reverse;
+}
+.uf-f-rrn {
+	-webkit-flex-flow: row-reverse nowrap;
+	-moz-flex-flow: row-reverse nowrap;
+	-ms-flex-flow: row-reverse nowrap;
+	-o-flex-flow: row-reverse nowrap;
+	flex-flow: row-reverse nowrap;
+}
+.uf-f-rrw {
+	-webkit-flex-flow: row-reverse wrap;
+	-moz-flex-flow: row-reverse wrap;
+	-ms-flex-flow: row-reverse wrap;
+	-o-flex-flow: row-reverse wrap;
+	flex-flow: row-reverse wrap;
+}
+.uf-f-rrwr {
+	-webkit-flex-flow: row-reverse wrap-reverse;
+	-moz-flex-flow: row-reverse wrap-reverse;
+	-ms-flex-flow: row-reverse wrap-reverse;
+	-o-flex-flow: row-reverse wrap-reverse;
+	flex-flow: row-reverse wrap-reverse;
+}
+.uf-f-cn {
+	-webkit-flex-flow: column nowrap;
+	-moz-flex-flow: column nowrap;
+	-ms-flex-flow: column nowrap;
+	-o-flex-flow: column nowrap;
+	flex-flow: column nowrap;
+}
+.uf-f-cw {
+	-webkit-flex-flow: column wrap;
+	-moz-flex-flow: column wrap;
+	-ms-flex-flow: column wrap;
+	-o-flex-flow: column wrap;
+	flex-flow: column wrap;
+}
+.uf-f-cwr {
+	-webkit-flex-flow: column wrap-reverse;
+	-moz-flex-flow: column wrap-reverse;
+	-ms-flex-flow: column wrap-reverse;
+	-o-flex-flow: column wrap-reverse;
+	flex-flow: column wrap-reverse;
+}
+.uf-f-crn {
+	-webkit-flex-flow: column-reverse nowrap;
+	-moz-flex-flow: column-reverse nowrap;
+	-ms-flex-flow: column-reverse nowrap;
+	-o-flex-flow: column-reverse nowrap;
+	flex-flow: column-reverse nowrap;
+}
+.uf-f-crw {
+	-webkit-flex-flow: column-reverse wrap;
+	-moz-flex-flow: column-reverse wrap;
+	-ms-flex-flow: column-reverse wrap;
+	-o-flex-flow: column-reverse wrap;
+	flex-flow: column-reverse wrap;
+}
+.uf-f-crwr {
+	-webkit-flex-flow: column-reverse wrap-reverse;
+	-moz-flex-flow: column-reverse wrap-reverse;
+	-ms-flex-flow: column-reverse wrap-reverse;
+	-o-flex-flow: column-reverse wrap-reverse;
+	flex-flow: column-reverse wrap-reverse;
+}
+
+/*justify-content属性定义了项目在主轴上的对齐方式。*/
+.uf-jc-fs {
+	/* 09版 */
+	-webkit-box-pack: start;
+	box-pack: start;
+	/* 12版 */
+	-webkit-justify-content: flex-start;
+	-moz-justify-content: flex-start;
+	-ms-justify-content: flex-start;
+	-o-justify-content: flex-start;
+	justify-content: flex-start;/*（默认值）：左对齐*/
+}
+.uf-jc-fe {
+	/* 09版 */
+	-webkit-box-pack: end;
+	box-pack: end;
+	/* 12版 */
+	-webkit-justify-content: flex-end;
+	-moz-justify-content: flex-end;
+	-ms-justify-content: flex-end;
+	-o-justify-content: flex-end;
+	justify-content: flex-end;/*右对齐*/
+}
+.uf-jc-c {
+	/* 09版 */
+	-webkit-box-pack: center;
+	box-pack: center;
+	/* 12版 */
+	-webkit-justify-content: center;
+	-moz-justify-content: center;
+	-ms-justify-content: center;
+	-o-justify-content: center;
+	justify-content: center;/*居中*/
+}
+.uf-jc-sb {
+	/* 09版 */
+	-webkit-box-pack: justify;
+	box-pack: justify;
+	/* 12版 */
+	-webkit-justify-content: space-between;
+	-moz-justify-content: space-between;
+	-ms-justify-content: space-between;
+	-o-justify-content: space-between;
+	justify-content: space-between;/*两端对齐，项目之间的间隔都相等。*/
+}
+.uf-jc-sa {
+	/* 12版 */
+	-webkit-justify-content: space-around;
+	-moz-justify-content: space-around;
+	-ms-justify-content: space-around;
+	-o-justify-content: space-around;
+	justify-content: space-around;/*每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。*/
+}
+
+/*align-items属性定义项目在交叉轴上如何对齐。*/
+.uf-ai-fs {
+	/* 09版 */
+	-webkit-box-align: start;
+	box-align: start;
+	/* 12版 */
+	-webkit-align-items: flex-start;
+	-moz-align-items: flex-start;
+	-ms-align-items: flex-start;
+	-o-align-items: flex-start;
+	align-items: flex-start;/*交叉轴的起点对齐。*/
+}
+.uf-ai-fe {
+	/* 09版 */
+	-webkit-box-align: end;
+	box-align: end;
+	/* 12版 */
+	-webkit-align-items: flex-end;
+	-moz-align-items: flex-end;
+	-ms-align-items: flex-end;
+	-o-align-items: flex-end;
+	align-items: flex-end;/*交叉轴的终点对齐。*/
+}
+.uf-ai-c {
+	/* 09版 */
+	-webkit-box-align: center;
+	box-align: center;
+	/* 12版 */
+	-webkit-align-items: center;
+	-moz-align-items: center;
+	-ms-align-items: center;
+	-o-align-items: center;
+	align-items: center;/*交叉轴的中点对齐。*/
+}
+.uf-ai-b {
+	/* 09版 */
+	-webkit-box-align: baseline;
+	box-align: baseline;
+	/* 12版 */
+	-webkit-align-items: baseline;
+	-moz-align-items: baseline;
+	-ms-align-items: baseline;
+	-o-align-items: baseline;
+	align-items: baseline;/*项目的第一行文字的基线对齐。*/
+}
+.uf-ai-s {
+	/* 09版 */
+	-webkit-box-align: stretch;
+	box-align: stretch;
+	/* 12版 */
+	-webkit-align-items: stretch;
+	-moz-align-items: stretch;
+	-ms-align-items: stretch;
+	-o-align-items: stretch;
+	align-items: stretch;/*（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。*/
+}
+
+
+/*align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。*/
+.uf-ac-fs {
+	/* 12版 */
+	-webkit-align-content: flex-start;
+	-moz-align-content: flex-start;
+	-ms-align-content: flex-start;
+	-o-align-content: flex-start;
+	align-content: flex-start;/*与交叉轴的起点对齐。*/
+}
+.uf-ac-fe {
+	/* 12版 */
+	-webkit-align-content: flex-end;
+	-moz-align-content: flex-end;
+	-ms-align-content: flex-end;
+	-o-align-content: flex-end;
+	align-content: flex-end;/*与交叉轴的终点对齐。*/
+}
+.uf-ac-c {
+	/* 12版 */
+	-webkit-align-content: center;
+	-moz-align-content: center;
+	-ms-align-content: center;
+	-o-align-content: center;
+	align-content: center;/*与交叉轴的中点对齐。*/
+}
+.uf-ac-sb {
+	/* 12版 */
+	-webkit-align-content: space-between;
+	-moz-align-content: space-between;
+	-ms-align-content: space-between;
+	-o-align-content: space-between;
+	align-content: space-between;/*与交叉轴两端对齐，轴线之间的间隔平均分布。*/
+}
+.uf-ac-sa {
+	/* 12版 */
+	-webkit-align-content: space-around;
+	-moz-align-content: space-around;
+	-ms-align-content: space-around;
+	-o-align-content: space-around;
+	align-content: space-around;/*每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。*/
+}
+.uf-ac-s {
+	/* 12版 */
+	-webkit-align-content: stretch;
+	-moz-align-content: stretch;
+	-ms-align-content: stretch;
+	-o-align-content: stretch;
+	align-content: stretch;/*默认值）：轴线占满整个交叉轴。*/
+}
+
+
+/*项目属性*/
+/*order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。*/
+.uf-o-0 {
+	-webkit-box-ordinal-group: 0;   /* OLD - iOS 6-, Safari 3.1-6 */
+	-moz-box-ordinal-group: 0;	  /* OLD - Firefox 19- */
+	-ms-flex-order: 0;			  /* TWEENER - IE 10 */
+	-webkit-order: 0;			   /* NEW - Chrome */
+	order: 0;					   /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+.uf-o-1 {
+	-webkit-box-ordinal-group: 1;   /* OLD - iOS 6-, Safari 3.1-6 */
+	-moz-box-ordinal-group: 1;	  /* OLD - Firefox 19- */
+	-ms-flex-order: 1;			  /* TWEENER - IE 10 */
+	-webkit-order: 1;			   /* NEW - Chrome */
+	order: 1;					   /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+.uf-o-10 {
+	-webkit-box-ordinal-group: 10;   /* OLD - iOS 6-, Safari 3.1-6 */
+	-moz-box-ordinal-group: 10;	  /* OLD - Firefox 19- */
+	-ms-flex-order: 10;			  /* TWEENER - IE 10 */
+	-webkit-order: 10;			   /* NEW - Chrome */
+	order: 10;					   /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+.uf-o-100 {
+	-webkit-box-ordinal-group: 100;   /* OLD - iOS 6-, Safari 3.1-6 */
+	-moz-box-ordinal-group: 100;	  /* OLD - Firefox 19- */
+	-ms-flex-order: 100;			  /* TWEENER - IE 10 */
+	-webkit-order: 100;			   /* NEW - Chrome */
+	order: 100;					   /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+
+
+/*flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。*/
+/*如果所有项目的flex-grow属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的flex-grow属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。*/
+.uf-fg-0 {
+	flex-grow: 0;/* default 0 */
+}
+.uf-fg-1 {
+	flex-grow: 1;
+}
+/*flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。*/
+/*如果所有项目的flex-shrink属性都为1，当空间不足时，都将等比例缩小。如果一个项目的flex-shrink属性为0，其他项目都为1，则空间不足时，前者不缩小。*/
+/*负值对该属性无效*/
+.uf-fs-1 {
+	flex-shrink: 1; /* default 1 */
+}
+/*flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。*/
+/*它可以设为跟width或height属性一样的值（比如350px），则项目将占据固定空间。*/
+.uf-fb-a {
+	flex-basis: auto; /* default auto */
+}
+
+
+/*flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。*/
+/*建议优先使用这个属性，而不是单独写三个分离的属性，因为浏览器会推算相关值。*/
+/* 该属性有两个快捷值：auto (1 1 auto) 和 none (0 0 auto) */
+/* 子元素-平均分栏 */
+.uf-1 {
+  -webkit-box-flex: 1;	  /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-flex: 1;		 /* OLD - Firefox 19- */
+  /*width: 20%;	*/		   /* For old syntax, otherwise collapses. */
+  -webkit-flex: 1;		  /* Chrome */
+  -ms-flex: 1;			  /* IE 10 */
+  flex: 1;				  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+/* 子元素-平均分栏 */
+.uf-2 {
+  -webkit-box-flex: 2;	  /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-flex: 2;		 /* OLD - Firefox 19- */
+  /*width: 40%;	*/		   /* For old syntax, otherwise collapses. */
+  -webkit-flex: 2;		  /* Chrome */
+  -ms-flex: 2;			  /* IE 10 */
+  flex: 2;				  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+/* 子元素-平均分栏 */
+.uf-3 {
+  -webkit-box-flex: 3;	  /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-flex: 3;		 /* OLD - Firefox 19- */
+  /*width: 60%;	*/		   /* For old syntax, otherwise collapses. */
+  -webkit-flex: 3;		  /* Chrome */
+  -ms-flex: 3;			  /* IE 10 */
+  flex: 3;				  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+/* 子元素-平均分栏 */
+.uf-4 {
+  -webkit-box-flex: 4;	  /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-flex: 4;		 /* OLD - Firefox 19- */
+  /*width: 80%;	*/		   /* For old syntax, otherwise collapses. */
+  -webkit-flex: 4;		  /* Chrome */
+  -ms-flex: 4;			  /* IE 10 */
+  flex: 4;				  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+/* 子元素-平均分栏 */
+.uf-5 {
+  -webkit-box-flex: 5;	  /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-flex: 5;		 /* OLD - Firefox 19- */
+  /*width: 100%;	*/		   /* For old syntax, otherwise collapses. */
+  -webkit-flex: 5;		  /* Chrome */
+  -ms-flex: 5;			  /* IE 10 */
+  flex: 5;				  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+
+
+/*align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。*/
+.uf-as-a {
+	-webkit-align-self: auto;
+	-moz-align-self: auto;
+	-ms-align-self: auto;
+	-o-align-self: auto;
+	align-self: auto;
+}
+.uf-as-fs {
+	-webkit-align-self: flex-start;
+	-moz-align-self: flex-start;
+	-ms-align-self: flex-start;
+	-o-align-self: flex-start;
+	align-self: flex-start;
+}
+.uf-as-fe {
+	-webkit-align-self: flex-end;
+	-moz-align-self: flex-end;
+	-ms-align-self: flex-end;
+	-o-align-self: flex-end;
+	align-self: flex-end;
+}
+.uf-as-c {
+	-webkit-align-self: center;
+	-moz-align-self: center;
+	-ms-align-self: center;
+	-o-align-self: center;
+	align-self: center;
+}
+.uf-as-b {
+	-webkit-align-self: baseline;
+	-moz-align-self: baseline;
+	-ms-align-self: baseline;
+	-o-align-self: baseline;
+	align-self: baseline;
+}
+.uf-as-s {
+	-webkit-align-self: stretch;
+	-moz-align-self: stretch;
+	-ms-align-self: stretch;
+	-o-align-self: stretch;
+	align-self: stretch;
+}
+
+
