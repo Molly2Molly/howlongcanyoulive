@@ -1,15 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import TodoApp from './components/TodoApp';
-
-import Counter from './components/Counter';
-import CounterAction from './actions/CounterAction';
-
 import rootReducer from './reducers';
+import TodoApp from './components/TodoApp';
+import CounterApp from './components/CounterApp';
+
 const store = createStore(rootReducer);
+
+const PrivateRoute = ({component: Component, ...rest }) => (
+  <Route {...rest} render={props => {
+    return <Component {...props} {...rest}/>
+  }} />
+);
 
 class App extends React.Component {
   render() {
@@ -20,7 +23,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={Index}/>
           <Route path="/user/:userId" component={User}/>
-          <Route path="/counter" component={CounterApp}/>
+          <PrivateRoute path="/counter" component={CounterApp} store={store}/>
           <Route path="/todo" component={TodoApp}/>
           <Route component={NoMatch}/>
         </Switch>
@@ -48,36 +51,9 @@ class Index extends React.Component {
   }
 }
 
-class CounterApp extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      counterValue : store.getState().counters
-    };
-    this.updateCounter = this.updateCounter.bind(this);
-    store.subscribe(this.updateCounter);
-  }
-
-  updateCounter() {
-    this.setState({
-      counterValue : store.getState().counters
-    });
-  }
-  
-  render() {
-    return (
-      <Counter 
-              value={this.state.counterValue}
-              onIncrement={()=>{store.dispatch({type:CounterAction.INCREMENT})}}
-              onDecrement={()=>{store.dispatch({type:CounterAction.DECREMENT})}}
-            />
-    );
-  }
-}
-
 class User extends React.Component {
   componentDidMount() {
+    console.log(this.props);
     console.log(this.props.match);
     console.log(this.props.location);
     console.log(this.props.history);
@@ -92,6 +68,7 @@ class User extends React.Component {
     );
   }
 }
+
 class NoMatch extends React.Component {
   render() {
     return (
@@ -103,9 +80,5 @@ class NoMatch extends React.Component {
     );
   }
 }
-
-// getUserInfo().then(function(data) {
-//   console.log(data)
-// });
 
 export default App;
