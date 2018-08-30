@@ -8,6 +8,8 @@ import { selectSubreddit, fetchPosts, fetchPostsIfNeeded } from './actions/Reddi
 import rootReducer from './reducers';
 import TodoApp from './components/TodoApp';
 import CounterApp from './components/CounterApp';
+import AsyncApp from './components/containers/AsyncApp';
+
 
 const loggerMilddleware = createLogger();
 const store = createStore(rootReducer, applyMiddleware(
@@ -16,12 +18,12 @@ const store = createStore(rootReducer, applyMiddleware(
 ));
 
 // Async actions
-store.dispatch(selectSubreddit('reactjs'));
-store.dispatch(fetchPosts('reactjs'))
-  .then(() => console.log(store.getState()));
-store
-  .dispatch(fetchPostsIfNeeded('reactjs'))
-  .then(() => console.log(store.getState()))
+// store.dispatch(selectSubreddit('reactjs'));
+// store.dispatch(fetchPosts('reactjs'))
+//   .then(() => console.log(store.getState()));
+// store
+//   .dispatch(fetchPostsIfNeeded('reactjs'))
+//   .then(() => console.log(store.getState()))
 
 const PrivateRoute = ({component: Component, ...rest }) => (
   <Route {...rest} render={props => {
@@ -39,7 +41,8 @@ class App extends React.Component {
             <Route exact path="/" component={Index}/>
             <Route path="/user/:userId" component={User}/>
             <PrivateRoute path="/counter" component={CounterApp} store={store}/>
-            <Route path="/todo" component={TodoApp}/>
+            <Route path="/todo/:filter?" component={TodoApp}/>
+            <Route path="/async" component={AsyncApp}/>
             <Route component={NoMatch}/>
           </Switch>
         </Router>
@@ -59,6 +62,8 @@ class Index extends React.Component {
         <Link to='/todo'>todo</Link>
         <br />
         <Link to='/counter'>counter</Link>
+        <br />
+        <Link to='/async'>async</Link>
         <br />
         <Link to='/other'>other</Link>
       </div>
