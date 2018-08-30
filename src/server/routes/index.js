@@ -9,6 +9,10 @@ module.exports = function (app) {
   app.use('/posts', require('./posts'));
   app.use('/email', require('./email'));
 
+  // app.get('/*', (req, res) => {
+  //   res.sendFile(path.join(__dirname, 'index.html'))
+  // })
+
   // 404 page
   // app.use(function (req, res) {
   //   if (!res.headersSent) {

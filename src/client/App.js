@@ -1,12 +1,27 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import { createStore } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import { selectSubreddit, fetchPosts, fetchPostsIfNeeded } from './actions/RedditAction';
 import rootReducer from './reducers';
 import TodoApp from './components/TodoApp';
 import CounterApp from './components/CounterApp';
 
-const store = createStore(rootReducer);
+const loggerMilddleware = createLogger();
+const store = createStore(rootReducer, applyMiddleware(
+  thunkMiddleware, // lets us dispatch() functions
+  loggerMilddleware // neat middleware that logs actions
+));
+
+// Async actions
+store.dispatch(selectSubreddit('reactjs'));
+store.dispatch(fetchPosts('reactjs'))
+  .then(() => console.log(store.getState()));
+store
+  .dispatch(fetchPostsIfNeeded('reactjs'))
+  .then(() => console.log(store.getState()))
 
 const PrivateRoute = ({component: Component, ...rest }) => (
   <Route {...rest} render={props => {
@@ -19,15 +34,15 @@ class App extends React.Component {
     // basename='/dist'
     return (
       <Provider store={store}>
-      <Router basename='/'>
-        <Switch>
-          <Route exact path="/" component={Index}/>
-          <Route path="/user/:userId" component={User}/>
-          <PrivateRoute path="/counter" component={CounterApp} store={store}/>
-          <Route path="/todo" component={TodoApp}/>
-          <Route component={NoMatch}/>
-        </Switch>
-      </Router>
+        <Router basename='/'>
+          <Switch>
+            <Route exact path="/" component={Index}/>
+            <Route path="/user/:userId" component={User}/>
+            <PrivateRoute path="/counter" component={CounterApp} store={store}/>
+            <Route path="/todo" component={TodoApp}/>
+            <Route component={NoMatch}/>
+          </Switch>
+        </Router>
       </Provider>
     );
   }
