@@ -16,14 +16,14 @@ const loggerMilddleware = createLogger();
 // );
 
 export default function configureStore(preloadedState) {
-  const middlewares = [];
+  let middlewares = [];
   middlewares.push(thunkMiddleware);
   if (process.env.NODE_ENV === "development") {
     middlewares.push(loggerMilddleware);
   }
-  const middlewareEnhancer = applyMiddleware(...middlewares);
+  let middlewareEnhancer = applyMiddleware(...middlewares);
 
-  const enhancers = [middlewareEnhancer];
+  let enhancers = [middlewareEnhancer];
   if (process.env.NODE_ENV === "development") {
     enhancers.push(monitorReducerEnhancer);
   }
