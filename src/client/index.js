@@ -7,7 +7,16 @@ import App from "./App.js";
 
 window.Promise = Promise;
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const renderApp = () =>
+  ReactDOM.render(<App />, document.getElementById("root"));
+
+// component hot reloading
+if (process.env.NODE_ENV !== "production" && module.hot) {
+  module.hot.accept("./App", () => {
+    renderApp();
+  });
+}
+renderApp();
 
 // if (module.hot) {
 //     module.hot.accept('./app.js', function() {
