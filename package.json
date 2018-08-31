@@ -14,7 +14,8 @@
     "supervisor": "set NODE_ENV=development && supervisor --harmony src/server/index.js",
     "start": "webpack-dev-server --mode development --open --color --config webpack.dev.js",
     "build": "webpack --mode production  --optimize-minimize --config webpack.prod.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier-watch": "npx onchange '**/*.js' -- prettier --write {{changed}}"
   },
   "repository": {
     "type": "git",
@@ -54,6 +55,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.0",
     "papaparse": "^4.6.0",
     "postcss-loader": "^3.0.0",
+    "prettier": "^1.14.2",
     "style-loader": "^0.22.1",
     "supervisor": "^0.12.0",
     "webpack": "^4.16.5",

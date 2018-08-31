@@ -1,4 +1,9 @@
-import {SELECT_SUBREDDIT,INVALIDATE_SUBREDDIT,REQUEST_POSTS,RECEIVE_POSTS} from '../actions/RedditAction';
+import { 
+    SELECT_SUBREDDIT,
+    INVALIDATE_SUBREDDIT,
+    REQUEST_POSTS,
+    RECEIVE_POSTS
+} from '../actions/RedditAction';
 
 export function selectedSubreddit(state = 'reactjs', action) {
     switch(action.type) {
