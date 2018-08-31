@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import './css/index.less';
-import './css/app.css';
+import "./css/index.less";
+import "./css/app.css";
 
-import App from './App.js';
+import App from "./App.js";
 
 window.Promise = Promise;
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById("root"));
 
 // if (module.hot) {
 //     module.hot.accept('./app.js', function() {
