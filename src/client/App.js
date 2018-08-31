@@ -1,27 +1,24 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import thunkMiddleware from "redux-thunk";
-import { createLogger } from "redux-logger";
-import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import {
   selectSubreddit,
   fetchPosts,
   fetchPostsIfNeeded
 } from "./actions/RedditAction";
-import rootReducer from "./reducers";
+import configureStore from "./configureStore";
 import TodoApp from "./components/TodoApp";
 import CounterApp from "./components/CounterApp";
 import AsyncApp from "./components/containers/AsyncApp";
 
-const loggerMilddleware = createLogger();
-const store = createStore(
-  rootReducer,
-  applyMiddleware(
-    thunkMiddleware, // lets us dispatch() functions
-    loggerMilddleware // neat middleware that logs actions
-  )
-);
+// const store = createStore(
+//   rootReducer,
+//   applyMiddleware(
+//     thunkMiddleware, // lets us dispatch() functions
+//     loggerMilddleware // neat middleware that logs actions
+//   )
+// );
+const store = configureStore();
 
 // Async actions
 // store.dispatch(selectSubreddit('reactjs'));
