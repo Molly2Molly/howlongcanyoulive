@@ -6,6 +6,14 @@ import rootReducer from "./reducers";
 
 const loggerMilddleware = createLogger();
 
+// const store = createStore(
+//   rootReducer,
+//   applyMiddleware(
+//     thunkMiddleware, // lets us dispatch() functions
+//     loggerMilddleware // neat middleware that logs actions
+//   )
+// );
+
 export default function configureStore(preloadedState) {
   const middlewares = [];
   middlewares.push(thunkMiddleware);

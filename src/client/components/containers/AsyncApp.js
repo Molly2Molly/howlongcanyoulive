@@ -9,6 +9,14 @@ import {
 import Picker from "../Picker";
 import Posts from "../Posts";
 
+// Async actions
+// store.dispatch(selectSubreddit('reactjs'));
+// store.dispatch(fetchPosts('reactjs'))
+//   .then(() => console.log(store.getState()));
+// store
+//   .dispatch(fetchPostsIfNeeded('reactjs'))
+//   .then(() => console.log(store.getState()))
+
 class AsyncApp extends Component {
   constructor(props) {
     super(props);

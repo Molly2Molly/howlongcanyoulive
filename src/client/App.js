@@ -1,32 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
-import {
-  selectSubreddit,
-  fetchPosts,
-  fetchPostsIfNeeded
-} from "./actions/RedditAction";
 import configureStore from "./configureStore";
 import TodoApp from "./components/TodoApp";
 import CounterApp from "./components/CounterApp";
 import AsyncApp from "./components/containers/AsyncApp";
 
-// const store = createStore(
-//   rootReducer,
-//   applyMiddleware(
-//     thunkMiddleware, // lets us dispatch() functions
-//     loggerMilddleware // neat middleware that logs actions
-//   )
-// );
 const store = configureStore();
-
-// Async actions
-// store.dispatch(selectSubreddit('reactjs'));
-// store.dispatch(fetchPosts('reactjs'))
-//   .then(() => console.log(store.getState()));
-// store
-//   .dispatch(fetchPostsIfNeeded('reactjs'))
-//   .then(() => console.log(store.getState()))
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
