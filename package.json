@@ -56,6 +56,7 @@
     "papaparse": "^4.6.0",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.14.2",
+    "redux-devtools-extension": "^2.13.5",
     "style-loader": "^0.22.1",
     "supervisor": "^0.12.0",
     "webpack": "^4.16.5",

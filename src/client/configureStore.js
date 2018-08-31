@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, compose } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
 import monitorReducerEnhancer from "./enhancers/monitorReducer";
@@ -26,8 +27,17 @@ export default function configureStore(preloadedState) {
   if (process.env.NODE_ENV === "development") {
     enhancers.push(monitorReducerEnhancer);
   }
-  const composedEnhancers = compose(...enhancers);
+  let composedEnhancers = composeWithDevTools(...enhancers);
+  if (process.env.NODE_ENV === "production") {
+    composedEnhancers = compose(...enhancers);
+  }
 
   const store = createStore(rootReducer, preloadedState, composedEnhancers);
+
+  // reducer hot reloading
+  if (process.env.NODE_ENV !== "production" && module.hot) {
+    module.hot.accept("./reducers", () => store.replaceReducer(rootReducer));
+  }
+
   return store;
 }
