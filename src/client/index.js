@@ -40,7 +40,6 @@ if (process.env.NODE_ENV !== "production" && module.hot) {
     renderApp();
   });
 }
-renderApp();
 
 // if (module.hot) {
 //     module.hot.accept('./app.js', function() {

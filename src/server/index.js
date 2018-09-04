@@ -10,11 +10,12 @@ var winston = require("winston");
 var expressWinston = require("express-winston");
 var moment = require("moment");
 
+import qs from "qs";
 import React from "react";
 import { renderToString } from "react-dom/server";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import App from "../client/components/containers/AsyncApp";
+import App from "../client/components/CounterApp";
 import rootReducer from "../client/reducers";
 
 var thisday = moment().format("YYYY-MM-DD");
@@ -89,17 +90,23 @@ app.use(
 // react server render
 app.use(handlerRender);
 function handlerRender(req, res) {
+  // read the counter from the request, if provided
+  const params = qs.parse(req.query);
+  const counter = parseInt(params.counter, 10) || 0;
+
+  // Compile an initial state
+  let preloadedState = { counters: counter };
   // create a new Redux store instance
-  const store = createStore(rootReducer);
+  const store = createStore(rootReducer, preloadedState);
   // render the component to a string
   // <CounterApp store={store} />
   const html = renderToString(
     <Provider store={store}>
-      <App />
+      <App store={store} />
     </Provider>
   );
   // Grab the initial state frin our Redux store
-  const preloadedState = store.getState();
+  preloadedState = store.getState();
   // Send the rendered page back to the client
   res.send(renderFullPage(html, preloadedState));
 }
