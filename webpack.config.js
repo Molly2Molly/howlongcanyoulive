@@ -8,13 +8,13 @@ const htmlPlugin = new HtmlWebPackPlugin({
   template: "./public/index.html"
 });
 
-const cleanPlugin = new CleanWebpackPlugin(["dist"]);
+const cleanPlugin = new CleanWebpackPlugin(["dist/client"]);
 
 module.exports = {
   entry: "./src/client/index.js",
   output: {
     filename: "[name].[hash].bundle.js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist/client")
     // for webpack-dev-middleware
     // publicPath: '/',
     // One of the below
@@ -27,7 +27,7 @@ module.exports = {
   },
   devtool: "inline-source-map",
   devServer: {
-    contentBase: path.join(__dirname, "dist"),
+    contentBase: path.join(__dirname, "dist/client"),
     compress: true,
     port: 8080,
     hot: true
