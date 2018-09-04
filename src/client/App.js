@@ -1,12 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import { Provider } from "react-redux";
-import configureStore from "./configureStore";
 import TodoApp from "./components/TodoApp";
 import CounterApp from "./components/CounterApp";
 import AsyncApp from "./components/containers/AsyncApp";
-
-const store = configureStore();
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -21,22 +17,20 @@ class App extends React.Component {
   render() {
     // basename='/dist'
     return (
-      <Provider store={store}>
-        <Router basename="/">
-          <Switch>
-            <Route exact path="/" component={Index} />
-            <Route path="/user/:userId" component={User} />
-            <PrivateRoute
-              path="/counter"
-              component={CounterApp}
-              store={store}
-            />
-            <Route path="/todo/:filter?" component={TodoApp} />
-            <Route path="/async" component={AsyncApp} />
-            <Route component={NoMatch} />
-          </Switch>
-        </Router>
-      </Provider>
+      <Router basename="/">
+        <Switch>
+          <Route exact path="/" component={Index} />
+          <Route path="/user/:userId" component={User} />
+          <PrivateRoute
+            path="/counter"
+            component={CounterApp}
+            store={this.props.store}
+          />
+          <Route path="/todo/:filter?" component={TodoApp} />
+          <Route path="/async" component={AsyncApp} />
+          <Route component={NoMatch} />
+        </Switch>
+      </Router>
     );
   }
 }

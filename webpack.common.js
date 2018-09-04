@@ -12,7 +12,8 @@ const cleanPlugin = new CleanWebpackPlugin(["dist/client"]);
 module.exports = {
   entry: "./src/client/index.js",
   output: {
-    filename: "[name].[hash].bundle.js",
+    //filename: "[name].[hash].bundle.js",
+    filename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist/client")
     // for webpack-dev-middleware
     // publicPath: '/',

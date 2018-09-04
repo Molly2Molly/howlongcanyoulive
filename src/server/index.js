@@ -10,12 +10,12 @@ var winston = require("winston");
 var expressWinston = require("express-winston");
 var moment = require("moment");
 
-// import React from "react";
-// import { renderToString } from "react-dom/server";
-// import { createStore } from "redux";
-// import { Provider } from "react-redux";
-// import CounterApp from "../client/components/CounterApp";
-// import rootReducer from "../client/reducers";
+import React from "react";
+import { renderToString } from "react-dom/server";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import App from "../client/components/containers/AsyncApp";
+import rootReducer from "../client/reducers";
 
 var thisday = moment().format("YYYY-MM-DD");
 var mongoose = require("./lib/mongoose");
@@ -84,7 +84,48 @@ app.use(
   })
 );
 // 路由
-routes(app);
+//routes(app);
+
+// react server render
+app.use(handlerRender);
+function handlerRender(req, res) {
+  // create a new Redux store instance
+  const store = createStore(rootReducer);
+  // render the component to a string
+  // <CounterApp store={store} />
+  const html = renderToString(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+  // Grab the initial state frin our Redux store
+  const preloadedState = store.getState();
+  // Send the rendered page back to the client
+  res.send(renderFullPage(html, preloadedState));
+}
+function renderFullPage(html, preloadedState) {
+  return `
+    <!doctype html>
+    <html>
+      <head>
+        <title>Redux Universal Example</title>
+      </head>
+      <body>
+        <div id="root">${html}</div>
+        <script>
+          // WARNING: See the following for security issues around embedding JSON in HTML:
+          // http://redux.js.org/recipes/ServerRendering.html#security-considerations
+          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
+            /</g,
+            "\\u003c"
+          )}
+        </script>
+        <script src="main.bundle.js"></script>
+      </body>
+    </html>
+    `;
+}
+
 // 错误请求的日志
 app.use(
   expressWinston.errorLogger({
@@ -106,46 +147,6 @@ app.use(function(err, req, res, next) {
     error: err
   });
 });
-
-// // react server render
-// app.use(handlerRender);
-// function handlerRender(req, res) {
-//   // create a new Redux store instance
-//   const store = createStore(rootReducer);
-//   // render the component to a string
-//   const html = renderToString(
-//     <Provider store={store}>
-//       <CounterApp />
-//     </Provider>
-//   );
-//   // Grab the initial state frin our Redux store
-//   const preloadedState = store.getState();
-//   // Send the rendered page back to the client
-//   res.send(renderFullPage(html, preloadedState));
-// }
-
-// function renderFullPage(html, preloadedState) {
-//   return `
-//     <!doctype html>
-//     <html>
-//       <head>
-//         <title>Redux Universal Example</title>
-//       </head>
-//       <body>
-//         <div id="root">${html}</div>
-//         <script>
-//           // WARNING: See the following for security issues around embedding JSON in HTML:
-//           // http://redux.js.org/recipes/ServerRendering.html#security-considerations
-//           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
-//             /</g,
-//             "\\u003c"
-//           )}
-//         </script>
-//         <script src="/static/bundle.js"></script>
-//       </body>
-//     </html>
-//     `;
-// }
 
 if (module.parent) {
   module.exports = app;
