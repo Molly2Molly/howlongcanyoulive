@@ -34,6 +34,8 @@ const renderApp = () => {
   }
 };
 
+renderApp();
+
 // component hot reloading
 if (process.env.NODE_ENV !== "production" && module.hot) {
   module.hot.accept("./App", () => {
