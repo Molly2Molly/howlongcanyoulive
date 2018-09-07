@@ -16,7 +16,7 @@
     "pm2start": "set NODE_ENV=production && pm2 start dist/server/index.js",
     "pm2restart": "set NODE_ENV=production && pm2 restart dist/server/index.js --node-args='--harmony'",
     "pm2stop": "set NODE_ENV=production && pm2 stop dist/server/index.js --node-args='--harmony'",
-    "prettier-watch": "npx onchange '**/*.js' -- prettier --write {{changed}}",
+    "prettier-watch": "npx onchange '**/*.js' '!./dist/**/*.js' '**/*.json' '!./dist/**/*.json' '**/*.css' '!./dist/**/*.css' '**/*.less' '!./dist/**/*.less' -- prettier --write {{changed}}",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
