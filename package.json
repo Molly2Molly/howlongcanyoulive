@@ -1,5 +1,5 @@
 {
-  "name": "amazing-doc",
+  "name": "howlongcanyoulive",
   "sideEffects": [
     "*.less",
     "*.css"
@@ -8,7 +8,7 @@
   "description": "the most useful document you may used",
   "main": "src/server/index.js",
   "scripts": {
-    "clientstart": "webpack-dev-server --mode development --open --color --config webpack.dev.js",
+    "clientstart": "webpack-dev-server --hot --mode development --open --color --config webpack.dev.js",
     "clientbuild": "webpack --mode production  --optimize-minimize --config webpack.prod.js",
     "serverstart": "nodemon src/server/index.js --exec babel-node --presets env,react",
     "serverbuild": "babel src/server -d dist/server --presets env,react --copy-files --plugins=babel-plugin-transform-runtime,transform-object-rest-spread",
@@ -60,6 +60,7 @@
     "papaparse": "^4.6.0",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.14.2",
+    "react-hot-loader": "^4.3.6",
     "redux-devtools-extension": "^2.13.5",
     "style-loader": "^0.22.1",
     "webpack": "^4.16.5",
@@ -69,6 +70,8 @@
     "xml-loader": "^1.2.1"
   },
   "dependencies": {
+    "@material-ui/core": "^3.0.3",
+    "@material-ui/icons": "^3.0.1",
     "axios": "^0.18.0",
     "config-lite": "^2.1.0",
     "connect-flash": "^0.1.1",
@@ -95,6 +98,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sha1": "^1.1.1",
+    "typeface-roboto": "0.0.54",
     "winston": "^2.3.0"
   }
 }

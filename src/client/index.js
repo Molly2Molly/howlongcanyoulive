@@ -2,8 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import configureStore from "./configureStore";
+import "typeface-roboto";
 import "./css/index.less";
-import "./css/app.css";
 import App from "./App.js";
 
 window.Promise = Promise;
@@ -38,7 +38,7 @@ renderApp();
 
 // component hot reloading
 if (process.env.NODE_ENV !== "production" && module.hot) {
-  module.hot.accept("./App", () => {
+  module.hot.accept(["./App"], () => {
     renderApp();
   });
 }
