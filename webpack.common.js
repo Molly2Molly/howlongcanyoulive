@@ -3,6 +3,8 @@ const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 
+require("dotenv").config();
+
 const htmlPlugin = new HtmlWebPackPlugin({
   template: "./public/index.html",
   favicon: "./public/favicon.ico"
@@ -18,8 +20,8 @@ module.exports = {
     chunkFilename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist/client")
     // for webpack-dev-middleware
-    // publicPath: '/',
     // One of the below
+    // publicPath: './',
     // publicPath: 'https://cdn.example.com/assets/', // CDN (always HTTPS)
     // publicPath: '//cdn.example.com/assets/', // CDN (same protocol)
     // publicPath: '/assets/', // server-relative

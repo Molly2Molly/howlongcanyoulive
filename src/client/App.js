@@ -19,7 +19,7 @@ const theme = createMuiTheme({
     // Tell Material-UI what's the font-size on the html element is.
     htmlFontSize: 16
   },
-  gap: 8
+  gap: "8vw"
 });
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
