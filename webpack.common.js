@@ -4,7 +4,8 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 const htmlPlugin = new HtmlWebPackPlugin({
-  template: "./public/index.html"
+  template: "./public/index.html",
+  favicon: "./public/favicon.ico"
 });
 
 const cleanPlugin = new CleanWebpackPlugin(["dist/client"]);
@@ -12,8 +13,9 @@ const cleanPlugin = new CleanWebpackPlugin(["dist/client"]);
 module.exports = {
   entry: "./src/client/index.js",
   output: {
-    //filename: "[name].[hash:8].bundle.js",
-    filename: "[name].bundle.js",
+    filename: "[name].[hash:8].bundle.js",
+    //chunkFilename: "[name].[hash:8].[chunkhash].bundle.js",
+    chunkFilename: "[name].bundle.js",
     path: path.resolve(__dirname, "dist/client")
     // for webpack-dev-middleware
     // publicPath: '/',
