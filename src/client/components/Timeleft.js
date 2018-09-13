@@ -14,7 +14,8 @@ class Timeleft extends React.Component {
     return (
       <React.Fragment>
         <Paper className={classes.root} elevation={1}>
-          Timeleft
+          <div>18250天</div>
+          <div>23:34:38</div>
         </Paper>
       </React.Fragment>
     );

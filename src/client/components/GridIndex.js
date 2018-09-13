@@ -18,7 +18,7 @@ class GridIndex extends React.Component {
     return (
       <Grid container spacing={0} direction="column" className={classes.root}>
         <ButtonAppBar />
-        <div className={styles.index_time_page}>
+        <div className={styles.indexTimePage}>
           <Timeleft />
         </div>
         <BottomAppNavigation />
