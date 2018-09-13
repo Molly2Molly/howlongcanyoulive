@@ -4,7 +4,7 @@ import { hot } from "react-hot-loader";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import GridIndex from "./components/GridIndex";
-import "./css/app.css";
+import styles from "./css/app.less";
 
 const theme = createMuiTheme({
   palette: {
@@ -18,8 +18,7 @@ const theme = createMuiTheme({
   typography: {
     // Tell Material-UI what's the font-size on the html element is.
     htmlFontSize: 16
-  },
-  gap: "8vw"
+  }
 });
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
