@@ -1,9 +1,18 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { hot } from "react-hot-loader";
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import {
+  MuiThemeProvider,
+  createMuiTheme,
+  withStyles
+} from "@material-ui/core/styles";
+import cssstyles from "./css/app.less";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import GridIndex from "./components/GridIndex";
+import Grid from "@material-ui/core/Grid";
+import IndexLayout from "./components/IndexLayout";
+import HeadLayout from "./components/HeadLayout";
+import Login from "./components/Login";
 
 const theme = createMuiTheme({
   palette: {
@@ -31,27 +40,41 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
+const styles = theme => ({
+  root: { flexGrow: 1 }
+});
+
 class App extends React.Component {
   render() {
+    const { classes } = this.props;
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <Router basename="/">
           {/* basename='/dist'*/}
-          <Switch>
-            <Route exact path="/" component={GridIndex} />
-            {/*
-            <Route path="/user/:userId" component={User} />
-            <PrivateRoute
-              path="/counter"
-              component={CounterApp}
-              store={this.props.store}
-            />
-            <Route path="/todo/:filter?" component={TodoApp} />
-            <Route path="/async" component={AsyncApp} />
-          */}
-            <Route component={NoMatch} />
-          </Switch>
+          <Grid
+            container
+            spacing={0}
+            direction="column"
+            className={classes.root}
+          >
+            <Switch>
+              <Route exact path="/" component={IndexLayout} />
+              <Route path="/test" component={IndexLayout} />
+              <Route path="/register" component={HeadLayout} />
+              <Route component={NoMatch} />
+              {/*
+                <Route path="/user/:userId" component={User} />
+                <PrivateRoute
+                  path="/counter"
+                  component={CounterApp}
+                  store={this.props.store}
+                />
+                <Route path="/todo/:filter?" component={TodoApp} />
+              */}
+            </Switch>
+            <Login />
+          </Grid>
         </Router>
       </MuiThemeProvider>
     );
@@ -88,4 +111,8 @@ class NoMatch extends React.Component {
   }
 }
 
-export default hot(module)(App);
+App.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default hot(module)(withStyles(styles)(App));

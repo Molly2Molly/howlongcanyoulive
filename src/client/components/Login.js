@@ -59,7 +59,7 @@ class Login extends React.Component {
               fullWidth
             />
             <DialogContentText>
-              <a href="###" className={classes.alink}>
+              <a href="/register" className={classes.alink}>
                 还没账号？去注册
               </a>
             </DialogContentText>

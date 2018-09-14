@@ -3,6 +3,7 @@ import fetch from "cross-fetch";
 export const userActionType = {
   OPENLOGINDIALOG: "OPENLOGINDIALOG",
   CLOSELOGINDIALOG: "CLOSELOGINDIALOG",
+  GOTOREGISTERPAGE: "GOTOREGISTERPAGE",
   REGISTERUSER_START: "REGISTERUSER_START",
   REGISTERUSER_SUCCESS: "REGISTERUSER_SUCCESS",
   REGISTERUSER_ERROR: "REGISTERUSER_ERROR",
@@ -16,6 +17,9 @@ export function openLoginDialog() {
 }
 export function closeLoginDialog() {
   return { type: userActionType.CLOSELOGINDIALOG };
+}
+export function gotoRegisterPage() {
+  return { type: userActionType.GOTOREGISTERPAGE };
 }
 
 // thunk action creator
