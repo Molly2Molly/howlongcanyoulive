@@ -4,6 +4,7 @@ import counters from "./CounterReducer";
 import todos from "./TodoReducer";
 import visibilityFilter from "./VisibilityFilterReducer";
 import { selectedSubreddit, postsBySubreddit } from "./RedditReducer";
+import userState from "./UserReducer";
 
 const undoableTodos = undoable(todos);
 
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   todos: undoableTodos,
   visibilityFilter,
   selectedSubreddit,
-  postsBySubreddit
+  postsBySubreddit,
+  userState
 });
 
 export default rootReducer;

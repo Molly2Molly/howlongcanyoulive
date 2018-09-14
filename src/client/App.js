@@ -16,8 +16,10 @@ const theme = createMuiTheme({
   },
   typography: {
     // Tell Material-UI what's the font-size on the html element is.
-    htmlFontSize: 14
-  }
+    htmlFontSize: 16
+  },
+  fontcolor: "#393939",
+  gap: "10px"
 });
 
 const PrivateRoute = ({ component: Component, ...rest }) => (

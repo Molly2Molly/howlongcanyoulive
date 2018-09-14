@@ -5,9 +5,10 @@ import Grid from "@material-ui/core/Grid";
 import ButtonAppBar from "./ButtonAppBar";
 import BottomAppNavigation from "./BottomAppNavigation";
 import Timeleft from "./Timeleft";
-import styles from "../css/app.less";
+import Login from "./Login";
+import cssstyles from "../css/app.less";
 
-const classes = theme => ({
+const styles = theme => ({
   root: { flexGrow: 1 },
   main: { flexGrow: 1, padding: theme.gap }
 });
@@ -18,8 +19,9 @@ class GridIndex extends React.Component {
     return (
       <Grid container spacing={0} direction="column" className={classes.root}>
         <ButtonAppBar />
-        <div className={styles.indexTimePage}>
+        <div className={cssstyles.indexTimePage}>
           <Timeleft />
+          <Login />
         </div>
         <BottomAppNavigation />
       </Grid>
@@ -31,4 +33,4 @@ GridIndex.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(classes)(GridIndex);
+export default withStyles(styles)(GridIndex);

@@ -1,6 +1,25 @@
 @import "base.less";
+
 .indexTimePage {
   flex-grow: 1;
   margin: @gap;
-  font-size: @fontsize;
+}
+
+.timeleft {
+  background-color: @bg!important;
+  > div:nth-child(1) {
+    font-size: 48px;
+    text-align: center;
+    padding-top: @gap;
+    > span {
+      font-weight: bold;
+      letter-spacing: 5px;
+    }
+  }
+  > div:nth-child(2) {
+    font-size: 36px;
+    text-align: center;
+    padding-bottom: @gap;
+    letter-spacing: 5px;
+  }
 }
