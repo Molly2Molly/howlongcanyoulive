@@ -1,13 +1,13 @@
 .indexTimePage {
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
-     -moz-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+  -moz-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
   margin: 20px;
 }
 .timeleft {
-  background-color: #F0ECE2 !important;
+  background-color: #f0ece2 !important;
 }
 .timeleft > div:nth-child(1) {
   font-size: 48px;
@@ -23,4 +23,7 @@
   text-align: center;
   padding-bottom: 20px;
   letter-spacing: 5px;
+}
+.button {
+  margin-top: 20px !important;
 }

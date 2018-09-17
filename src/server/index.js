@@ -9,17 +9,16 @@ var pkg = require("../../package");
 var winston = require("winston");
 var expressWinston = require("express-winston");
 var moment = require("moment");
+// var thisday = moment().format("YYYY-MM-DD");
 
-import qs from "qs";
-import React from "react";
-import { renderToString } from "react-dom/server";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
-import App from "../client/components/CounterApp";
-import rootReducer from "../client/reducers";
-
-var thisday = moment().format("YYYY-MM-DD");
-var mongoose = require("./lib/mongoose");
+// import qs from "qs";
+// import React from "react";
+// import { renderToString } from "react-dom/server";
+// import { createStore } from "redux";
+// import { Provider } from "react-redux";
+// import App from "../client/components/CounterApp";
+// import rootReducer from "../client/reducers";
+// var mongoose = require("./lib/mongoose");
 
 var app = express();
 
@@ -84,54 +83,55 @@ app.use(
     ]
   })
 );
+
 // 路由
-//routes(app);
+routes(app);
 
 // react server render
-app.use(handlerRender);
-function handlerRender(req, res) {
-  // read the counter from the request, if provided
-  const params = qs.parse(req.query);
-  const counter = parseInt(params.counter, 10) || 0;
+// app.use(handlerRender);
+// function handlerRender(req, res) {
+//   // read the counter from the request, if provided
+//   const params = qs.parse(req.query);
+//   const counter = parseInt(params.counter, 10) || 0;
 
-  // Compile an initial state
-  let preloadedState = { counters: counter };
-  // create a new Redux store instance
-  const store = createStore(rootReducer, preloadedState);
-  // render the component to a string
-  // <CounterApp store={store} />
-  const html = renderToString(
-    <Provider store={store}>
-      <App store={store} />
-    </Provider>
-  );
-  // Grab the initial state frin our Redux store
-  preloadedState = store.getState();
-  // Send the rendered page back to the client
-  res.send(renderFullPage(html, preloadedState));
-}
-function renderFullPage(html, preloadedState) {
-  return `
-    <!doctype html>
-    <html>
-      <head>
-        <title>Redux Universal Example</title>
-      </head>
-      <body>
-        <div id="root">${html}</div>
-        <script>
-          // WARNING: See the following for security issues around embedding JSON in HTML:
-          // http://redux.js.org/recipes/ServerRendering.html#security-considerations
-          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
-            /</g,
-            "\\u003c"
-          )}
-        </script>
-        <script src="main.bundle.js"></script>
-      </body>
-    </html>
-    `;
-}
+//   // Compile an initial state
+//   let preloadedState = { counters: counter };
+//   // create a new Redux store instance
+//   const store = createStore(rootReducer, preloadedState);
+//   // render the component to a string
+//   // <CounterApp store={store} />
+//   const html = renderToString(
+//     <Provider store={store}>
+//       <App store={store} />
+//     </Provider>
+//   );
+//   // Grab the initial state frin our Redux store
+//   preloadedState = store.getState();
+//   // Send the rendered page back to the client
+//   res.send(renderFullPage(html, preloadedState));
+// }
+// function renderFullPage(html, preloadedState) {
+//   return `
+//     <!doctype html>
+//     <html>
+//       <head>
+//         <title>Redux Universal Example</title>
+//       </head>
+//       <body>
+//         <div id="root">${html}</div>
+//         <script>
+//           // WARNING: See the following for security issues around embedding JSON in HTML:
+//           // http://redux.js.org/recipes/ServerRendering.html#security-considerations
+//           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
+//             /</g,
+//             "\\u003c"
+//           )}
+//         </script>
+//         <script src="main.bundle.js"></script>
+//       </body>
+//     </html>
+//     `;
+// }
 
 // 错误请求的日志
 app.use(

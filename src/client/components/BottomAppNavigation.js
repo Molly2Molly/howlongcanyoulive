@@ -38,7 +38,7 @@ class BottomAppNavigation extends React.Component {
         className={classes.root}
       >
         <BottomNavigationAction label="我的" icon={<HomeIcon />} />
-        <BottomNavigationAction label="论坛" icon={<GroupIcon />} />
+        <BottomNavigationAction label="聊天室" icon={<GroupIcon />} />
       </BottomNavigation>
     );
   }
