@@ -1,21 +1,27 @@
-import { headerActionType } from "../actions/HeaderAction";
+import {
+  backStatusType,
+  loginStatusType,
+  headerActionType,
+  titleType
+} from "../actions/HeaderAction";
 
 // Object.assign({}, state, {visibilityFilter: action.filter})
 // { ...state, ...newState }
 export default (
   state = {
-    isShowBack: false,
-    title: "How Long Can You Live"
+    backStatus: backStatusType.hide,
+    loginStatus: loginStatusType.login,
+    title: titleType.default
   },
   action
 ) => {
   switch (action.type) {
-    case headerActionType.REFRESHHEADER:
-      return Object.assign({}, state, { isOpen: true });
-    case headerActionType.SHOWBACK:
-      return Object.assign({}, state, { isOpen: false });
-    case headerActionType.HIDEBACK:
-      return Object.assign({}, state, { isFetching: true });
+    case headerActionType.REFRESHTITLE:
+      return Object.assign({}, state, { title: action.title });
+    case headerActionType.CHANGEBACKSTATUS:
+      return Object.assign({}, state, { backStatus: action.backStatus });
+    case headerActionType.CHANGELOGINSTATUS:
+      return Object.assign({}, state, { loginStatus: action.loginStatus });
     default:
       return state;
   }

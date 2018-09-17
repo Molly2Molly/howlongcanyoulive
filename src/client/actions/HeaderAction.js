@@ -1,24 +1,55 @@
-export const headerActionType = {
-  REFRESHHEADER: "REFRESHHEADER",
-  SHOWBACK: "SHOWBACK",
-  HIDEBACK: "HIDEBACK"
+export const backStatusType = {
+  hide: "hide",
+  show: "show"
+};
+export const loginStatusType = {
+  login: "login",
+  logout: "logout",
+  user: "user",
+  hide: "hide"
+};
+export const titleType = {
+  default: "How Long Can You Live"
 };
 
-export function refreshHeader(title) {
+export const headerActionType = {
+  REFRESHTITLE: "REFRESHTITLE",
+  CHANGEBACKSTATUS: "CHANGEBACKSTATUS",
+  CHANGELOGINSTATUS: "CHANGELOGINSTATUS"
+};
+
+export function refreshTitle(title) {
   return {
-    type: headerActionType.REFRESHHEADER,
-    title: title
+    type: headerActionType.REFRESHTITLE,
+    title: title ? title : titleType.default
   };
 }
 
-export function showBack() {
+export function changeBackStatus(backStatus) {
   return {
-    type: headerActionType.SHOWBACK
+    type: headerActionType.CHANGEBACKSTATUS,
+    backStatus: backStatus
   };
 }
 
-export function hideBack() {
+export function changeLoginStatus(loginStatus) {
   return {
-    type: headerActionType.HIDEBACK
+    type: headerActionType.CHANGELOGINSTATUS,
+    loginStatus: loginStatus
+  };
+}
+
+export function headerBackAndTitle(title) {
+  return dispatch => {
+    dispatch(refreshTitle(title));
+    dispatch(changeBackStatus(backStatusType.show));
+    //dispatch(changeLoginStatus(loginStatusType.hide));
+  };
+}
+
+export function headerIndex() {
+  return dispatch => {
+    dispatch(refreshTitle());
+    dispatch(changeBackStatus(backStatusType.hide));
   };
 }

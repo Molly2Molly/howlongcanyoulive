@@ -1,7 +1,9 @@
 import React from "react";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { closeLoginDialog } from "../actions/UserAction";
+import { headerBackAndTitle } from "../actions/HeaderAction";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -26,14 +28,22 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.handleClose = this.handleClose.bind(this);
+    this.gotoRegister = this.gotoRegister.bind(this);
   }
 
   handleClose() {
     this.props.dispatch(closeLoginDialog());
   }
 
+  gotoRegister(e) {
+    //e.preventDefault();
+    this.props.dispatch(headerBackAndTitle("注册"));
+    this.props.dispatch(closeLoginDialog());
+    //this.props.history.push("/register");
+  }
+
   render() {
-    const { classes, userState } = this.props;
+    const { classes, userState, dispatch } = this.props;
     return (
       <div>
         <Dialog
@@ -59,9 +69,13 @@ class Login extends React.Component {
               fullWidth
             />
             <DialogContentText>
-              <a href="/register" className={classes.alink}>
+              <Link
+                to="/register"
+                className={classes.alink}
+                onClick={this.gotoRegister}
+              >
                 还没账号？去注册
-              </a>
+              </Link>
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -85,7 +99,10 @@ function mapStateToProps(state) {
 
 Login.propTypes = {
   classes: PropTypes.object.isRequired,
-  userState: PropTypes.object.isRequired
+  userState: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(Login));
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(Login)));

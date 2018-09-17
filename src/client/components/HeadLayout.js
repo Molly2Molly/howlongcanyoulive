@@ -6,6 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 import cssstyles from "../css/app.less";
 import ButtonAppBar from "./ButtonAppBar";
 import Register from "./Register";
+import {} from "../actions/HeaderAction";
 
 const styles = {
   root: {},
@@ -40,13 +41,20 @@ class HeadLayout extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { userState } = state;
-  return { userState };
+  const { headerState } = state;
+  return { headerState };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {};
 }
 
 HeadLayout.propTypes = {
   classes: PropTypes.object.isRequired,
-  userState: PropTypes.object.isRequired
+  headerState: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(HeadLayout));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(HeadLayout));
