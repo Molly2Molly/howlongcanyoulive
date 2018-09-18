@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { closeLoginDialog } from "../actions/UserAction";
+import { withRouter } from "react-router";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
+import { closeLoginDialog, registerUser } from "../actions/UserAction";
 import cssstyles from "../css/app.less";
 
 const styles = theme => ({
@@ -29,12 +30,8 @@ class Register extends React.Component {
       birthday: "",
       sex: "male"
     };
-    this.handleClose = this.handleClose.bind(this);
     this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleClose() {
-    this.props.dispatch(closeLoginDialog());
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(name) {
@@ -51,10 +48,28 @@ class Register extends React.Component {
     };
   }
 
+  handleSubmit() {
+    this.props.dispatch(
+      registerUser(
+        this.props.history,
+        this.state.email,
+        this.state.password,
+        this.state.nickname,
+        this.state.birthday,
+        this.state.sex
+      )
+    );
+  }
+
   render() {
     const { classes, userState } = this.props;
     return (
-      <form className={classes.container} noValidate autoComplete="off">
+      <form
+        className={classes.container}
+        noValidate
+        autoComplete="off"
+        id="registerForm"
+      >
         <TextField
           required
           autoFocus
@@ -133,6 +148,7 @@ class Register extends React.Component {
           color="primary"
           className={cssstyles.button}
           fullWidth
+          onClick={this.handleSubmit}
         >
           确认
         </Button>
@@ -148,7 +164,12 @@ function mapStateToProps(state) {
 
 Register.propTypes = {
   classes: PropTypes.object.isRequired,
-  userState: PropTypes.object.isRequired
+  userState: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(Register));
+export default withRouter(
+  connect(mapStateToProps)(withStyles(styles)(Register))
+);

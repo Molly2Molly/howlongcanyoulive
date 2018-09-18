@@ -5,5 +5,7 @@ module.exports = {
   viewportUnit: "vw", // (String) Expected units.
   selectorBlackList: ["html", "ignore", "hairlines"], // (Array) The selectors to ignore and leave as px.
   minPixelValue: 1, // (Number) Set the minimum pixel value to replace.
-  mediaQuery: false // (Boolean) Allow px to be converted in media queries.
+  mediaQuery: false, // (Boolean) Allow px to be converted in media queries.
+
+  serverBaseUrl: "http://localhost:5000"
 };

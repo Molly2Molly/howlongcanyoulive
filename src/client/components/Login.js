@@ -2,8 +2,6 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { closeLoginDialog } from "../actions/UserAction";
-import { headerBackAndTitle } from "../actions/HeaderAction";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -12,6 +10,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import { closeLoginDialog, loginUser } from "../actions/UserAction";
+import { headerBackAndTitle } from "../actions/HeaderAction";
 import cssstyles from "../css/app.less";
 
 const styles = theme => ({
@@ -20,14 +20,16 @@ const styles = theme => ({
     fontSize: "14px",
     marginTop: theme.gap,
     marginBottom: theme.gap,
-    color: theme.fontcolor
+    color: theme.fontColor
   }
 });
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { email: "", password: "" };
     this.handleClose = this.handleClose.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
     this.gotoRegister = this.gotoRegister.bind(this);
   }
 
@@ -40,6 +42,26 @@ class Login extends React.Component {
     this.props.dispatch(headerBackAndTitle("注册"));
     this.props.dispatch(closeLoginDialog());
     //this.props.history.push("/register");
+  }
+
+  handleChange(name) {
+    var _that = this;
+    return function(event) {
+      _that.setState(
+        {
+          [name]: event.target.value
+        },
+        function() {
+          //console.log(_that.state);
+        }
+      );
+    };
+  }
+
+  handleLogin() {
+    this.props.dispatch(
+      loginUser(this.props.history, this.state.email, this.state.password)
+    );
   }
 
   render() {
@@ -60,6 +82,8 @@ class Login extends React.Component {
               label="邮箱"
               type="email"
               fullWidth
+              value={this.state.email}
+              onChange={this.handleChange("email")}
             />
             <TextField
               margin="dense"
@@ -67,6 +91,8 @@ class Login extends React.Component {
               label="密码"
               type="password"
               fullWidth
+              value={this.state.password}
+              onChange={this.handleChange("password")}
             />
             <DialogContentText>
               <Link
@@ -82,7 +108,7 @@ class Login extends React.Component {
             <Button onClick={this.handleClose} color="primary">
               取消
             </Button>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleLogin} color="primary">
               登陆
             </Button>
           </DialogActions>

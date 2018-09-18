@@ -5,7 +5,7 @@ var router = express.Router();
 import { ErrorCode } from "../lib/mongoose";
 import UserModel from "../models/users";
 
-// GET /register
+// 用户注册
 router.post("/register", function(req, res, next) {
   var email = req.fields.email ? req.fields.email : "";
   var password = req.fields.password ? sha1(req.fields.password) : "";
@@ -15,7 +15,7 @@ router.post("/register", function(req, res, next) {
   if (!email || !password || !nickname || !birthday || !sex) {
     return res.json({
       errcode: ErrorCode.missParameter,
-      err: "Missing Parameters"
+      errmsg: "Missing Parameters"
     });
   }
   UserModel.create({
@@ -31,34 +31,47 @@ router.post("/register", function(req, res, next) {
     .catch(function(err) {
       // undo system log
       console.log(err);
-      return res.json({ errcode: ErrorCode.unknow, err: err });
+      return res.json({
+        errcode: ErrorCode.unknow,
+        errmsg: err.message || err.errmsg
+      });
     });
 });
 
-// POST /signin 用户登录
-router.post("/", function(req, res, next) {
-  var name = req.fields.name;
-  var password = req.fields.password;
-
-  UserModel.getUserByName(name)
-    .then(function(user) {
-      if (!user) {
-        req.flash("error", "用户不存在");
-        return res.redirect("back");
+// 用户登陆
+router.post("/login", function(req, res, next) {
+  var email = req.fields.email ? req.fields.email : "";
+  var password = req.fields.password ? sha1(req.fields.password) : "";
+  if (!email || !password) {
+    return res.json({
+      errcode: ErrorCode.missParameter,
+      errmsg: "Missing Parameters"
+    });
+  }
+  UserModel.getUserByEmail(email)
+    .then(function(userfind) {
+      if (!userfind) {
+        return res.json({
+          errcode: ErrorCode.noAccount,
+          errmsg: "This account havn't be registered."
+        });
+      } else if (userfind.password == password) {
+        return res.json(userfind);
+      } else {
+        return res.json({
+          errcode: ErrorCode.passwordError,
+          errmsg: "Password is error"
+        });
       }
-      // 检查密码是否匹配
-      if (sha1(password) !== user.password) {
-        req.flash("error", "用户名或密码错误");
-        return res.redirect("back");
-      }
-      req.flash("success", "登录成功");
-      // 用户信息写入 session
-      delete user.password;
-      req.session.user = user;
-      // 跳转到主页
-      res.redirect("/posts");
     })
-    .catch(next);
+    .catch(function(err) {
+      // undo system log
+      console.log(err);
+      return res.json({
+        errcode: ErrorCode.unknow,
+        errmsg: err.message || err.errmsg
+      });
+    });
 });
 
 module.exports = router;

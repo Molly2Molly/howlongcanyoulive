@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { hot } from "react-hot-loader";
 import {
@@ -13,6 +14,8 @@ import Grid from "@material-ui/core/Grid";
 import IndexLayout from "./components/IndexLayout";
 import HeadLayout from "./components/HeadLayout";
 import Login from "./components/Login";
+import Loading from "./components/Loading";
+import Alert from "./components/Alert";
 
 const theme = createMuiTheme({
   palette: {
@@ -25,9 +28,10 @@ const theme = createMuiTheme({
   },
   typography: {
     // Tell Material-UI what's the font-size on the html element is.
-    htmlFontSize: 16
+    // htmlFontSize: 0
   },
-  fontcolor: "#393939",
+  fontSize: "16px",
+  fontColor: "#393939",
   gap: "10px"
 });
 
@@ -74,6 +78,18 @@ class App extends React.Component {
               */}
             </Switch>
             <Login />
+            {this.props.loadingState.isOpen && (
+              <Loading
+                isOpen={this.props.loadingState.isOpen}
+                title={this.props.loadingState.title}
+              />
+            )}
+            {this.props.alertState.isOpen && (
+              <Alert
+                isOpen={this.props.alertState.isOpen}
+                title={this.props.alertState.title}
+              />
+            )}
           </Grid>
         </Router>
       </MuiThemeProvider>
@@ -111,8 +127,15 @@ class NoMatch extends React.Component {
   }
 }
 
+function mapStateToProps(state) {
+  const { loadingState, alertState } = state;
+  return { loadingState, alertState };
+}
+
 App.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  loadingState: PropTypes.object.isRequired,
+  alertState: PropTypes.object.isRequired
 };
 
-export default hot(module)(withStyles(styles)(App));
+export default hot(module)(connect(mapStateToProps)(withStyles(styles)(App)));

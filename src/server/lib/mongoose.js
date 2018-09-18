@@ -85,6 +85,8 @@ module.exports.User = User;
 // console.log(userAdmin.fullName);
 
 module.exports.ErrorCode = {
+  unknow: 0,
   missParameter: 1,
-  unknow: 0
+  passwordError: 2,
+  noAccount: 3
 };

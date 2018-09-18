@@ -6,6 +6,8 @@ import visibilityFilter from "./VisibilityFilterReducer";
 import { selectedSubreddit, postsBySubreddit } from "./RedditReducer";
 import userState from "./UserReducer";
 import headerState from "./HeaderReducer";
+import loadingState from "./LoadingReducer";
+import alertState from "./AlertReducer";
 
 const undoableTodos = undoable(todos);
 
@@ -16,7 +18,9 @@ const rootReducer = combineReducers({
   selectedSubreddit,
   postsBySubreddit,
   userState,
-  headerState
+  headerState,
+  loadingState,
+  alertState
 });
 
 export default rootReducer;

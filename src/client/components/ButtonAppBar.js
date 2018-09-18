@@ -40,7 +40,7 @@ class ButtonAppBar extends React.Component {
   }
 
   render() {
-    const { classes, headerState } = this.props;
+    const { classes, headerState, userState } = this.props;
     return (
       <div className={classes.root}>
         <AppBar position="static">
@@ -59,7 +59,7 @@ class ButtonAppBar extends React.Component {
               </IconButton>
             )}
             <div className={classes.grow}>{headerState.title}</div>
-            {headerState.loginStatus == loginStatusType.login && (
+            {!userState.email && (
               <Button
                 color="inherit"
                 className={classes.login}
@@ -68,7 +68,8 @@ class ButtonAppBar extends React.Component {
                 登陆
               </Button>
             )}
-            {headerState.loginStatus == loginStatusType.logout && (
+
+            {/*userState.email && (
               <Button
                 color="inherit"
                 className={classes.login}
@@ -76,14 +77,10 @@ class ButtonAppBar extends React.Component {
               >
                 登出
               </Button>
-            )}
-            {headerState.loginStatus == loginStatusType.user && (
-              <Button
-                color="inherit"
-                className={classes.login}
-                onClick={this.handelLoginClick}
-              >
-                用户
+            )*/}
+            {userState.email && (
+              <Button color="inherit" className={classes.login}>
+                {userState.nickname}
               </Button>
             )}
           </Toolbar>

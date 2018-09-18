@@ -26,10 +26,8 @@ export default (
     case userActionType.LOGINUSER_ERROR:
       return Object.assign({}, state, { isFetching: false });
     case userActionType.REGISTERUSER_SUCCESS:
-      // undo
       return Object.assign({}, state, action.userinfo, { isFetching: false });
     case userActionType.LOGINUSER_SUCCESS:
-      // undo
       return Object.assign({}, state, action.userinfo, { isFetching: false });
     default:
       return state;
