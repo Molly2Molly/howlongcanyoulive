@@ -33,13 +33,22 @@ class IndexLayout extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, userState } = this.props;
     return (
       <React.Fragment>
         <ButtonAppBar />
         <div className={cssstyles.indexTimePage}>
-          <Route exact path="/" component={Timeleft} />
+          {userState.birthday && (
+            <Route
+              exact
+              path="/"
+              render={props => {
+                return <Timeleft />;
+              }}
+            />
+          )}
           {/*
+                <Route exact path="/" component={Timeleft} />
                 <Route path="/user/:userId" component={User} />
                 <PrivateRoute
                   path="/counter"

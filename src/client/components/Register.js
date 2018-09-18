@@ -34,6 +34,12 @@ class Register extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.userState.email) {
+      this.props.history.goBack();
+    }
+  }
+
   handleChange(name) {
     var _that = this;
     return function(event) {

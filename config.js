@@ -7,5 +7,6 @@ module.exports = {
   minPixelValue: 1, // (Number) Set the minimum pixel value to replace.
   mediaQuery: false, // (Boolean) Allow px to be converted in media queries.
 
+  //http://localhost:5000
   serverBaseUrl: "http://localhost:5000"
 };

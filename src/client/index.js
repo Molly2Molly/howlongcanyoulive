@@ -8,30 +8,31 @@ import App from "./App.js";
 
 window.Promise = Promise;
 
-// grab the state from a global variable injected into the server-generated HTML
-const preloadedState = window.__PRELOADED_STATE__;
-// Allow the passed state to be garbage=collected
-delete window.__PRELOADED_STATE__;
+let preloadedState;
+let renderFunc;
+
+if (window.__PRELOADED_STATE__) {
+  // SERVER SIDE RENDER
+  // grab the state from a global variable injected into the server-generated HTML
+  preloadedState = window.__PRELOADED_STATE__;
+  // Allow the passed state to be garbage=collected
+  delete window.__PRELOADED_STATE__;
+  // data-react-id attributes from the server-rendered HTML
+  renderFunc = ReactDOM.hydrate;
+} else {
+  // NOT SERVER SIDE RENDER
+  renderFunc = ReactDOM.render;
+}
 
 const store = configureStore(preloadedState);
 
 const renderApp = () => {
-  if (!preloadedState) {
-    ReactDOM.render(
-      <Provider store={store}>
-        <App store={store} />
-      </Provider>,
-      document.getElementById("root")
-    );
-  } else {
-    // data-react-id attributes from the server-rendered HTML
-    ReactDOM.hydrate(
-      <Provider store={store}>
-        <App store={store} />
-      </Provider>,
-      document.getElementById("root")
-    );
-  }
+  renderFunc(
+    <Provider store={store}>
+      <App store={store} />
+    </Provider>,
+    document.getElementById("root")
+  );
 };
 
 renderApp();

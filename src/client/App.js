@@ -64,7 +64,6 @@ class App extends React.Component {
           >
             <Switch>
               <Route exact path="/" component={IndexLayout} />
-              <Route path="/test" component={IndexLayout} />
               <Route path="/register" component={HeadLayout} />
               <Route component={NoMatch} />
               {/*

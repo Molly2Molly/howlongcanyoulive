@@ -40,7 +40,7 @@ class Alert extends React.Component {
       if (alertState.callback) {
         alertState.callback();
       }
-    }, 3000);
+    }, 2000);
   }
 
   componentWillUnmount() {

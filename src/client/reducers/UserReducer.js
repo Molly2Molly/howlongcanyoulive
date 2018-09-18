@@ -1,16 +1,20 @@
 import { userActionType } from "../actions/UserAction";
+import { localStorageSession } from "../../../public/libs/utils";
 
 // Object.assign({}, state, {visibilityFilter: action.filter})
 // { ...state, ...newState }
+
+const initUser = localStorageSession.getItem("HLCYLUSER");
+
 export default (
   state = {
     isOpen: false,
     isFetching: false,
-    email: "",
-    password: "",
-    nickname: "",
-    birthday: "",
-    sex: "male"
+    email: initUser ? initUser.email : "",
+    password: initUser ? initUser.password : "",
+    nickname: initUser ? initUser.nickname : "",
+    birthday: initUser ? initUser.birthday : "",
+    sex: initUser ? initUser.sex : ""
   },
   action
 ) => {
@@ -26,9 +30,12 @@ export default (
     case userActionType.LOGINUSER_ERROR:
       return Object.assign({}, state, { isFetching: false });
     case userActionType.REGISTERUSER_SUCCESS:
-      return Object.assign({}, state, action.userinfo, { isFetching: false });
     case userActionType.LOGINUSER_SUCCESS:
-      return Object.assign({}, state, action.userinfo, { isFetching: false });
+      const newState = Object.assign({}, state, action.userinfo, {
+        isFetching: false
+      });
+      localStorageSession.setItem("HLCYLUSER", newState, 1440);
+      return newState;
     default:
       return state;
   }
