@@ -1,7 +1,7 @@
 @import "base.less";
 
 .indexTimePage {
-  flex-grow: 1;
+  flex: 1 1 auto;
   margin: @gap;
 }
 
@@ -9,25 +9,41 @@
   background-color: @bg!important;
   padding: @gap;
   > div:nth-child(1) {
-    font-size: 36px;
+    font-size: 1.875rem;
     text-align: center;
     padding-top: @gap;
-    letter-spacing: 5px;
+    letter-spacing: 0.0625rem;
+    > div:nth-child(1) {
+      > div:nth-child(1) {
+        height: 8px !important;
+      }
+    }
     > div:nth-child(2) {
       margin-top: 20px;
+      //background-image: linear-gradient(to right, deeppink, dodgerblue);
+      background-image: linear-gradient(135deg, deeppink, dodgerblue);
+      background-clip: text;
+      -webkit-background-clip: text;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+      color: transparent;
     }
   }
   > div:nth-child(2) {
-    font-size: 30px;
+    font-size: 0.875rem;
     text-align: center;
     margin-top: 40px;
-    letter-spacing: 5px;
+    letter-spacing: 0.0625rem;
     display: flex;
     > div {
       flex: 1;
       > div:nth-child(1) {
         position: relative;
         font-size: 0;
+        > div {
+          width: 80px !important;
+          height: 80px !important;
+        }
         > div:nth-child(2) {
           position: absolute;
           left: 0;
@@ -36,6 +52,9 @@
           bottom: 0;
           margin: auto;
         }
+      }
+      > div:nth-child(2) {
+        margin-top: 10px;
       }
     }
   }

@@ -1,29 +1,39 @@
 .indexTimePage {
   -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
+  -webkit-flex: 1 1 auto;
   -moz-box-flex: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  margin: 20px;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  margin: 30px;
 }
 .timeleft {
   background-color: #f0ece2 !important;
-  padding: 20px;
+  padding: 30px;
 }
 .timeleft > div:nth-child(1) {
-  font-size: 36px;
+  font-size: 1.875rem;
   text-align: center;
-  padding-top: 20px;
-  letter-spacing: 5px;
+  padding-top: 30px;
+  letter-spacing: 0.0625rem;
+}
+.timeleft > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) {
+  height: 8px !important;
 }
 .timeleft > div:nth-child(1) > div:nth-child(2) {
   margin-top: 20px;
+  background-image: -webkit-linear-gradient(315deg, deeppink, dodgerblue);
+  background-image: linear-gradient(135deg, deeppink, dodgerblue);
+  background-clip: text;
+  -webkit-background-clip: text;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  color: transparent;
 }
 .timeleft > div:nth-child(2) {
-  font-size: 30px;
+  font-size: 0.875rem;
   text-align: center;
   margin-top: 40px;
-  letter-spacing: 5px;
+  letter-spacing: 0.0625rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -41,6 +51,10 @@
   position: relative;
   font-size: 0;
 }
+.timeleft > div:nth-child(2) > div > div:nth-child(1) > div {
+  width: 80px !important;
+  height: 80px !important;
+}
 .timeleft > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2) {
   position: absolute;
   left: 0;
@@ -49,6 +63,9 @@
   bottom: 0;
   margin: auto;
 }
+.timeleft > div:nth-child(2) > div > div:nth-child(2) {
+  margin-top: 10px;
+}
 .button {
-  margin-top: 20px !important;
+  margin-top: 30px !important;
 }

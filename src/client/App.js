@@ -45,7 +45,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 );
 
 const styles = theme => ({
-  root: { flexGrow: 1 }
+  root: { height: "100%" }
 });
 
 class App extends React.Component {

@@ -16,7 +16,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIos from "@material-ui/icons/ArrowBackIos";
 
 const styles = {
-  root: {},
+  root: { height: "3.5rem" },
   grow: {
     flexGrow: 1
   },
@@ -42,9 +42,9 @@ class ButtonAppBar extends React.Component {
   render() {
     const { classes, headerState, userState } = this.props;
     return (
-      <div className={classes.root}>
+      <div>
         <AppBar position="static">
-          <Toolbar>
+          <Toolbar className={classes.root}>
             {headerState.backStatus == backStatusType.show && (
               <IconButton
                 className={classes.menuButton}

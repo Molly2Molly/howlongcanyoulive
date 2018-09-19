@@ -7,9 +7,9 @@
   html {
     width: 100%;
     height: 100%;
-  }
-  html {
     font-size: 16px;
+    font-size: calc(100% + 1 * (100vw - 375px) * 0.01);
+    font-size: calc(16px + 1 * (100vw - 375px) * 0.01);
   }
   //   @media screen and (min-width: 375px) {
   //     html {
@@ -50,7 +50,6 @@
   #root {
     width: 100%;
     height: 100%;
-    display: flex;
   }
   img {
     content: normal !important;

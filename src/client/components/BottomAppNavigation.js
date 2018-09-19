@@ -8,7 +8,7 @@ import GroupIcon from "@material-ui/icons/Group";
 import cssstyles from "../css/app.less";
 
 const styles = {
-  root: {}
+  root: { height: "3.5rem" }
 };
 
 class BottomAppNavigation extends React.Component {
