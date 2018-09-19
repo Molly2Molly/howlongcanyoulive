@@ -7,23 +7,28 @@
 
 .timeleft {
   background-color: @bg!important;
-  > div:nth-child(1) {
-    font-size: 48px;
+  padding: @gap;
+  >div:nth-child(1) {
+    font-size: 40px;
     text-align: center;
     padding-top: @gap;
-    > span {
-      font-weight: bold;
-      letter-spacing: 5px;
+    letter-spacing: 5px;
+    >div:nth-child(2) {
+      margin-top:20px;
     }
   }
-  > div:nth-child(2) {
-    font-size: 36px;
+  >div:nth-child(2) {
+    font-size: 30px;
     text-align: center;
-    padding-bottom: @gap;
+    margin-top: 40px;
     letter-spacing: 5px;
+    display: flex;
+    >div {
+      flex: 1;
+    }
   }
 }
 
 .button {
-  margin-top:@gap!important;
+  margin-top: @gap!important;
 }

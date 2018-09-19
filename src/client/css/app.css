@@ -8,21 +8,34 @@
 }
 .timeleft {
   background-color: #f0ece2 !important;
+  padding: 20px;
 }
 .timeleft > div:nth-child(1) {
-  font-size: 48px;
+  font-size: 40px;
   text-align: center;
   padding-top: 20px;
-}
-.timeleft > div:nth-child(1) > span {
-  font-weight: bold;
   letter-spacing: 5px;
+}
+.timeleft > div:nth-child(1) > div:nth-child(2) {
+  margin-top: 20px;
 }
 .timeleft > div:nth-child(2) {
-  font-size: 36px;
+  font-size: 30px;
   text-align: center;
-  padding-bottom: 20px;
+  margin-top: 40px;
   letter-spacing: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.timeleft > div:nth-child(2) > div {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 .button {
   margin-top: 20px !important;
