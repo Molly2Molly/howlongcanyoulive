@@ -8,23 +8,35 @@
 .timeleft {
   background-color: @bg!important;
   padding: @gap;
-  >div:nth-child(1) {
-    font-size: 40px;
+  > div:nth-child(1) {
+    font-size: 36px;
     text-align: center;
     padding-top: @gap;
     letter-spacing: 5px;
-    >div:nth-child(2) {
-      margin-top:20px;
+    > div:nth-child(2) {
+      margin-top: 20px;
     }
   }
-  >div:nth-child(2) {
+  > div:nth-child(2) {
     font-size: 30px;
     text-align: center;
     margin-top: 40px;
     letter-spacing: 5px;
     display: flex;
-    >div {
+    > div {
       flex: 1;
+      > div:nth-child(1) {
+        position: relative;
+        font-size: 0;
+        > div:nth-child(2) {
+          position: absolute;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          margin: auto;
+        }
+      }
     }
   }
 }

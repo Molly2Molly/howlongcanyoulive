@@ -11,7 +11,7 @@
   padding: 20px;
 }
 .timeleft > div:nth-child(1) {
-  font-size: 40px;
+  font-size: 36px;
   text-align: center;
   padding-top: 20px;
   letter-spacing: 5px;
@@ -36,6 +36,18 @@
   -moz-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
+}
+.timeleft > div:nth-child(2) > div > div:nth-child(1) {
+  position: relative;
+  font-size: 0;
+}
+.timeleft > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2) {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
 }
 .button {
   margin-top: 20px !important;

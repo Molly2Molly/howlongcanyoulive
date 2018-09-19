@@ -39,7 +39,8 @@ class Timeleft extends React.Component {
     const { userState } = this.props;
     if (userState.birthday) {
       const birthtime = new Date(
-        userState.birthday.replace(/-/, "/")
+        //userState.birthday.replace(/-/, "/")
+        userState.birthday
       ).getTime();
       const lasttime = birthtime + (80 * 365 + 20) * 24 * 60 * 60 * 1000;
       const totdaldays = 365 * 80;
@@ -100,33 +101,54 @@ class Timeleft extends React.Component {
             </div>
             <div>
               <div>
-                <CircularProgress
-                  variant="static"
-                  value={this.state.hourspercent}
-                  style={{ color: "#666" }}
-                />
+                <div>
+                  <CircularProgress
+                    variant="static"
+                    value={100}
+                    style={{ color: "#ccc" }}
+                  />
+                  <CircularProgress
+                    variant="static"
+                    value={this.state.hourspercent}
+                    style={{ color: "#666" }}
+                  />
+                </div>
                 <div>
                   {this.state.hours}
                   小时
                 </div>
               </div>
               <div>
-                <CircularProgress
-                  variant="static"
-                  value={this.state.minutespercent}
-                  style={{ color: "#666" }}
-                />
+                <div>
+                  <CircularProgress
+                    variant="static"
+                    value={100}
+                    style={{ color: "#ccc" }}
+                  />
+                  <CircularProgress
+                    variant="static"
+                    value={this.state.minutespercent}
+                    style={{ color: "#666" }}
+                  />
+                </div>
                 <div>
                   {this.state.minutes}
                   分钟
                 </div>
               </div>
               <div>
-                <CircularProgress
-                  variant="static"
-                  value={this.state.secondspercent}
-                  style={{ color: "#666" }}
-                />
+                <div>
+                  <CircularProgress
+                    variant="static"
+                    value={100}
+                    style={{ color: "#ccc" }}
+                  />
+                  <CircularProgress
+                    variant="static"
+                    value={this.state.secondspercent}
+                    style={{ color: "#666" }}
+                  />
+                </div>
                 <div>{this.state.seconds}秒</div>
               </div>
             </div>
