@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
+import validate from "validate.js";
+import moment from "moment";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -27,7 +29,12 @@ const styles = theme => ({
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { email: "", password: "" };
+    this.state = {
+      email: "",
+      password: "",
+      emailMsg: "",
+      passwordMsg: ""
+    };
     this.handleClose = this.handleClose.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.gotoRegister = this.gotoRegister.bind(this);
@@ -59,9 +66,45 @@ class Login extends React.Component {
   }
 
   handleLogin() {
-    this.props.dispatch(
-      loginUser(this.props.history, this.state.email, this.state.password)
-    );
+    const loginConstraints = {
+      email: {
+        presence: {
+          allowEmpty: false,
+          message: "请填写邮箱"
+        },
+        email: {
+          message: "不是个有效的邮箱哦"
+        }
+      },
+      password: {
+        length: {
+          minimum: 6,
+          maximum: 12,
+          tooShort: "密码长度不能小于6位",
+          tooLong: "密码长度不能大于12位"
+        }
+      }
+    };
+
+    const validateResults = validate(this.state, loginConstraints, {
+      fullMessages: false
+    });
+    this.setState({
+      emailMsg:
+        validateResults && validateResults.email
+          ? validateResults.email[0]
+          : "",
+      passwordMsg:
+        validateResults && validateResults.password
+          ? validateResults.password[0]
+          : ""
+    });
+
+    if (!validateResults) {
+      this.props.dispatch(
+        loginUser(this.props.history, this.state.email, this.state.password)
+      );
+    }
   }
 
   render() {
@@ -84,6 +127,8 @@ class Login extends React.Component {
               fullWidth
               value={this.state.email}
               onChange={this.handleChange("email")}
+              error={this.state.emailMsg ? true : false}
+              helperText={this.state.emailMsg}
             />
             <TextField
               margin="dense"
@@ -93,6 +138,8 @@ class Login extends React.Component {
               fullWidth
               value={this.state.password}
               onChange={this.handleChange("password")}
+              error={this.state.passwordMsg ? true : false}
+              helperText={this.state.passwordMsg}
             />
             <DialogContentText>
               <Link
