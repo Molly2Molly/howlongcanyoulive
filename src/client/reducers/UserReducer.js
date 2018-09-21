@@ -5,19 +5,17 @@ import { localStorageSession } from "../../../public/libs/utils";
 // { ...state, ...newState }
 
 const initUser = localStorageSession.getItem("HLCYLUSER");
+const defaultUserState = {
+  isOpen: false,
+  isFetching: false,
+  email: initUser ? initUser.email : "",
+  password: initUser ? initUser.password : "",
+  nickname: initUser ? initUser.nickname : "",
+  birthday: initUser ? initUser.birthday : "",
+  sex: initUser ? initUser.sex : ""
+};
 
-export default (
-  state = {
-    isOpen: false,
-    isFetching: false,
-    email: initUser ? initUser.email : "",
-    password: initUser ? initUser.password : "",
-    nickname: initUser ? initUser.nickname : "",
-    birthday: initUser ? initUser.birthday : "",
-    sex: initUser ? initUser.sex : ""
-  },
-  action
-) => {
+export default (state = defaultUserState, action) => {
   switch (action.type) {
     case userActionType.OPENLOGINDIALOG:
       return Object.assign({}, state, { isOpen: true });
@@ -36,6 +34,17 @@ export default (
       });
       localStorageSession.setItem("HLCYLUSER", newState, 1440);
       return newState;
+    case userActionType.LOGOUTUSER:
+      localStorage.removeItem("HLCYLUSER");
+      return {
+        isOpen: false,
+        isFetching: false,
+        email: "",
+        password: "",
+        nickname: "",
+        birthday: "",
+        sex: ""
+      };
     default:
       return state;
   }

@@ -14,7 +14,8 @@ export const userActionType = {
   REGISTERUSER_ERROR: "REGISTERUSER_ERROR",
   LOGINUSER_START: "LOGINUSER_START",
   LOGINUSER_SUCCESS: "LOGINUSER_SUCCESS",
-  LOGINUSER_ERROR: "LOGINUSER_ERROR"
+  LOGINUSER_ERROR: "LOGINUSER_ERROR",
+  LOGOUTUSER: "LOGOUTUSER"
 };
 
 export function openLoginDialog() {
@@ -140,4 +141,9 @@ export function loginUser(history, email, password) {
         })
     );
   };
+}
+
+export function logoutUser(callback) {
+  if (callback) callback();
+  return { type: userActionType.LOGOUTUSER };
 }

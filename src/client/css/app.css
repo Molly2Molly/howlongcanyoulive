@@ -34,6 +34,10 @@
 .footer button svg {
   font-size: 1.5rem;
 }
+.drawerRight {
+  width: 300px;
+  text-align: center;
+}
 .timeleft {
   background-color: #f0ece2 !important;
   padding: 30px;

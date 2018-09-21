@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import cssstyles from "../css/app.less";
-import ButtonAppBar from "./ButtonAppBar";
-import BottomAppNavigation from "./BottomAppNavigation";
+import Header from "./Header";
+import Footer from "./Footer";
 import Timeleft from "./Timeleft";
 
 const styles = {
@@ -36,7 +36,7 @@ class IndexLayout extends React.Component {
     const { classes, userState } = this.props;
     return (
       <React.Fragment>
-        <ButtonAppBar />
+        <Header />
         <div className={cssstyles.centerContainer}>
           <div>
             {userState.birthday && (
@@ -60,7 +60,7 @@ class IndexLayout extends React.Component {
               */}
           </div>
         </div>
-        <BottomAppNavigation />
+        <Footer />
       </React.Fragment>
     );
   }

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import cssstyles from "../css/app.less";
-import ButtonAppBar from "./ButtonAppBar";
+import Header from "./Header";
 import Register from "./Register";
 import {} from "../actions/HeaderAction";
 
@@ -31,7 +31,7 @@ class HeadLayout extends React.Component {
     const { classes } = this.props;
     return (
       <React.Fragment>
-        <ButtonAppBar />
+        <Header />
         <div className={cssstyles.centerContainer}>
           <div>
             <Route path="/register" component={Register} />
