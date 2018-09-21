@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import moment from "moment";
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import LinearProgress from "@material-ui/core/LinearProgress";
@@ -38,16 +39,23 @@ class Timeleft extends React.Component {
   componentDidMount() {
     const { userState } = this.props;
     if (userState.birthday) {
-      const birthtime = new Date(
-        //userState.birthday.replace(/-/, "/")
-        userState.birthday
-      ).getTime();
-      const lasttime = birthtime + (80 * 365 + 20) * 24 * 60 * 60 * 1000;
+      // utc+8:00
+      // const timezoneOffset = new Date().getTimezoneOffset();
+      // const birthtime =
+      //   moment.utc(userState.birthday) + timezoneOffset * 60 * 1000;
+      const birthtime = moment(userState.birthday);
+      const lasttime = moment(birthtime).add(80, "years");
       const totdaldays = 365 * 80;
+      // console.log(new Date(lasttime).format("yyyy-mm-dd hh:ii:ss"));
+      // console.log(
+      //   moment()
+      //     .utc()
+      //     .format("YYYY-MM-DD hh:mm:ss")
+      // );
       this.timer = setInterval(
         function() {
-          let now = new Date().getTime();
-          let left = lasttime - now;
+          let nowtime = moment();
+          let left = lasttime - nowtime;
           let leftdays = Math.floor(left / (24 * 60 * 60 * 1000));
           left = Math.floor(left % (24 * 60 * 60 * 1000));
           let lefthours = Math.floor(left / (60 * 60 * 1000));

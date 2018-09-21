@@ -15,7 +15,7 @@ router.post("/register", function(req, res, next) {
   if (!email || !password || !nickname || !birthday || !sex) {
     return res.json({
       errcode: ErrorCode.missParameter,
-      errmsg: "Missing Parameters"
+      errmsg: "缺少参数"
     });
   }
   UserModel.create({
@@ -31,9 +31,15 @@ router.post("/register", function(req, res, next) {
     .catch(function(err) {
       // undo system log
       console.log(err);
+      let errmsg = "未知错误";
+      console.log(err.errors);
+      if (err.errors && err.errors.email && err.errors.email.path == "email") {
+        errmsg = err.errors.email.value + " 已被注册";
+      }
       return res.json({
         errcode: ErrorCode.unknow,
-        errmsg: err.message || err.errmsg
+        //errmsg: err.message || err.errmsg
+        errmsg: errmsg
       });
     });
 });
@@ -45,7 +51,7 @@ router.post("/login", function(req, res, next) {
   if (!email || !password) {
     return res.json({
       errcode: ErrorCode.missParameter,
-      errmsg: "Missing Parameters"
+      errmsg: "缺少参数"
     });
   }
   UserModel.getUserByEmail(email)
@@ -53,14 +59,14 @@ router.post("/login", function(req, res, next) {
       if (!userfind) {
         return res.json({
           errcode: ErrorCode.noAccount,
-          errmsg: "This account havn't be registered."
+          errmsg: "这个邮箱还未注册哦"
         });
       } else if (userfind.password == password) {
         return res.json(userfind);
       } else {
         return res.json({
           errcode: ErrorCode.passwordError,
-          errmsg: "Password is error"
+          errmsg: "密码错误"
         });
       }
     })
@@ -69,7 +75,8 @@ router.post("/login", function(req, res, next) {
       console.log(err);
       return res.json({
         errcode: ErrorCode.unknow,
-        errmsg: err.message || err.errmsg
+        //errmsg: err.message || err.errmsg
+        errmsg: "未知错误"
       });
     });
 });

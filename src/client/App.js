@@ -60,7 +60,7 @@ class App extends React.Component {
             container
             spacing={0}
             direction="column"
-            className={classes.root}
+            className={cssstyles.gridroot}
           >
             <Switch>
               <Route exact path="/" component={IndexLayout} />

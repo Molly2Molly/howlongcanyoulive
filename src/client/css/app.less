@@ -1,8 +1,37 @@
 @import "base.less";
 
-.indexTimePage {
-  flex: 1 1 auto;
-  margin: @gap;
+.gridroot {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.header {
+  position: relative !important;
+  width: 100%;
+  height: 3.5rem !important;
+}
+
+.centerContainer {
+  flex: 1;
+  width: 100%;
+  overflow-y: scroll;
+  > div {
+    padding: @gap;
+  }
+}
+
+.footer {
+  position: relative;
+  width: 100%;
+  height: 3.5rem !important;
+  justify-content: space-around;
+  button {
+    max-width: inherit;
+    svg {
+      font-size: 1.5rem;
+    }
+  }
 }
 
 .timeleft {
@@ -15,11 +44,11 @@
     letter-spacing: 0.0625rem;
     > div:nth-child(1) {
       > div:nth-child(1) {
-        height: 8px !important;
+        height: 0.25rem !important;
       }
     }
     > div:nth-child(2) {
-      margin-top: 20px;
+      margin-top: 0.625rem;
       //background-image: linear-gradient(to right, deeppink, dodgerblue);
       background-image: linear-gradient(135deg, deeppink, dodgerblue);
       background-clip: text;
@@ -32,7 +61,7 @@
   > div:nth-child(2) {
     font-size: 0.875rem;
     text-align: center;
-    margin-top: 40px;
+    margin-top: 1.25rem;
     letter-spacing: 0.0625rem;
     display: flex;
     > div {
@@ -41,8 +70,8 @@
         position: relative;
         font-size: 0;
         > div {
-          width: 80px !important;
-          height: 80px !important;
+          width: 2.5rem !important;
+          height: 2.5rem !important;
         }
         > div:nth-child(2) {
           position: absolute;
@@ -54,7 +83,7 @@
         }
       }
       > div:nth-child(2) {
-        margin-top: 10px;
+        margin-top: 0.625rem;
       }
     }
   }

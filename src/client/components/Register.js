@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import validate from "validate.js";
+import moment from "moment";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { withStyles } from "@material-ui/core/styles";
@@ -28,7 +30,12 @@ class Register extends React.Component {
       password: "",
       nickname: "",
       birthday: "",
-      sex: "male"
+      sex: "male",
+      emailMsg: "",
+      passwordMsg: "",
+      nicknameMsg: "",
+      birthdayMsg: "",
+      sexMsg: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -55,16 +62,100 @@ class Register extends React.Component {
   }
 
   handleSubmit() {
-    this.props.dispatch(
-      registerUser(
-        this.props.history,
-        this.state.email,
-        this.state.password,
-        this.state.nickname,
-        this.state.birthday,
-        this.state.sex
-      )
-    );
+    // Before using it we must add the parse and format functions
+    validate.extend(validate.validators.datetime, {
+      parse: function(value, options) {
+        return +moment(value);
+      },
+      format: function(value, options) {
+        var format = options.dateOnly ? "YYYY-MM-DD" : "YYYY-MM-DD hh:mm:ss";
+        return moment(value).format(format);
+      }
+    });
+
+    const registerConstraints = {
+      email: {
+        presence: {
+          allowEmpty: false,
+          message: "请填写邮箱"
+        },
+        email: {
+          message: "不是个有效的邮箱哦"
+        }
+      },
+      password: {
+        length: {
+          minimum: 6,
+          maximum: 12,
+          tooShort: "密码长度不能小于6位",
+          tooLong: "密码长度不能大于12位"
+        }
+      },
+      nickname: {
+        presence: {
+          allowEmpty: false,
+          message: "请填写昵称"
+        }
+      },
+      birthday: {
+        presence: {
+          allowEmpty: false,
+          message: "请选择生日"
+        },
+        datetime: {
+          //dateOnly: true,
+          latest: moment().format("YYYY-MM-DD"),
+          earliest: moment()
+            .subtract(80, "years")
+            .format("YYYY-MM-DD"),
+          tooEarly: "抱歉，您的年龄太大了，已无法估算您的剩余存活时间",
+          tooLate: "emmmmm, 难道您是穿越回来的？",
+          notValid: "生日格式不对哦"
+        }
+      },
+      sex: {
+        presence: {
+          message: "请选择性别"
+        }
+      }
+    };
+
+    const validateResults = validate(this.state, registerConstraints, {
+      fullMessages: false
+    });
+    this.setState({
+      emailMsg:
+        validateResults && validateResults.email
+          ? validateResults.email[0]
+          : "",
+      passwordMsg:
+        validateResults && validateResults.password
+          ? validateResults.password[0]
+          : "",
+      nicknameMsg:
+        validateResults && validateResults.nickname
+          ? validateResults.nickname[0]
+          : "",
+      birthdayMsg:
+        validateResults && validateResults.birthday
+          ? validateResults.birthday[0]
+          : "",
+      sexMsg:
+        validateResults && validateResults.sex ? validateResults.sex[0] : ""
+    });
+
+    if (!validateResults) {
+      this.props.dispatch(
+        registerUser(
+          this.props.history,
+          this.state.email,
+          this.state.password,
+          this.state.nickname,
+          this.state.birthday,
+          this.state.sex
+        )
+      );
+    }
   }
 
   render() {
@@ -87,6 +178,8 @@ class Register extends React.Component {
           onChange={this.handleChange("email")}
           margin="normal"
           fullWidth
+          error={this.state.emailMsg ? true : false}
+          helperText={this.state.emailMsg}
         />
         <TextField
           required
@@ -98,6 +191,8 @@ class Register extends React.Component {
           onChange={this.handleChange("password")}
           margin="normal"
           fullWidth
+          error={this.state.passwordMsg ? true : false}
+          helperText={this.state.passwordMsg}
         />
         <TextField
           required
@@ -109,6 +204,8 @@ class Register extends React.Component {
           onChange={this.handleChange("nickname")}
           margin="normal"
           fullWidth
+          error={this.state.nicknameMsg ? true : false}
+          helperText={this.state.nicknameMsg}
         />
         <TextField
           required
@@ -123,6 +220,8 @@ class Register extends React.Component {
           InputLabelProps={{
             shrink: true
           }}
+          error={this.state.birthdayMsg ? true : false}
+          helperText={this.state.birthdayMsg}
         />
         <TextField
           required
@@ -140,7 +239,8 @@ class Register extends React.Component {
               className: classes.menu
             }
           }}
-          helperText=""
+          error={this.state.sexMsg ? true : false}
+          helperText={this.state.sexMsg}
         >
           <MenuItem key={1} value={"male"}>
             男

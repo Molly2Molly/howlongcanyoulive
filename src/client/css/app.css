@@ -1,10 +1,38 @@
-.indexTimePage {
+.gridroot {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.header {
+  position: relative !important;
+  width: 100%;
+  height: 3.5rem !important;
+}
+.centerContainer {
   -webkit-box-flex: 1;
-  -webkit-flex: 1 1 auto;
+  -webkit-flex: 1;
   -moz-box-flex: 1;
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto;
-  margin: 30px;
+  -ms-flex: 1;
+  flex: 1;
+  width: 100%;
+  overflow-y: scroll;
+}
+.centerContainer > div {
+  padding: 30px;
+}
+.footer {
+  position: relative;
+  width: 100%;
+  height: 3.5rem !important;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+}
+.footer button {
+  max-width: inherit;
+}
+.footer button svg {
+  font-size: 1.5rem;
 }
 .timeleft {
   background-color: #f0ece2 !important;
@@ -17,10 +45,10 @@
   letter-spacing: 0.0625rem;
 }
 .timeleft > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) {
-  height: 8px !important;
+  height: 0.25rem !important;
 }
 .timeleft > div:nth-child(1) > div:nth-child(2) {
-  margin-top: 20px;
+  margin-top: 0.625rem;
   background-image: -webkit-linear-gradient(315deg, deeppink, dodgerblue);
   background-image: linear-gradient(135deg, deeppink, dodgerblue);
   background-clip: text;
@@ -32,7 +60,7 @@
 .timeleft > div:nth-child(2) {
   font-size: 0.875rem;
   text-align: center;
-  margin-top: 40px;
+  margin-top: 1.25rem;
   letter-spacing: 0.0625rem;
   display: -webkit-box;
   display: -webkit-flex;
@@ -52,8 +80,8 @@
   font-size: 0;
 }
 .timeleft > div:nth-child(2) > div > div:nth-child(1) > div {
-  width: 80px !important;
-  height: 80px !important;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
 }
 .timeleft > div:nth-child(2) > div > div:nth-child(1) > div:nth-child(2) {
   position: absolute;
@@ -64,7 +92,7 @@
   margin: auto;
 }
 .timeleft > div:nth-child(2) > div > div:nth-child(2) {
-  margin-top: 10px;
+  margin-top: 0.625rem;
 }
 .button {
   margin-top: 30px !important;

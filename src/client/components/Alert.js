@@ -21,10 +21,10 @@ const styles = theme => ({
     fontSize: theme.fontSize,
     color: theme.fontColor,
     margin: theme.gap,
-    padding: "0 " + theme.gap,
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "noWrap"
+    padding: "0 " + theme.gap
+    // overflow: "hidden",
+    // textOverflow: "ellipsis",
+    // whiteSpace: "noWrap"
   }
 });
 

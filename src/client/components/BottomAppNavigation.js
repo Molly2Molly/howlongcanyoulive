@@ -8,7 +8,7 @@ import GroupIcon from "@material-ui/icons/Group";
 import cssstyles from "../css/app.less";
 
 const styles = {
-  root: { height: "3.5rem" }
+  root: {}
 };
 
 class BottomAppNavigation extends React.Component {
@@ -35,7 +35,7 @@ class BottomAppNavigation extends React.Component {
         value={value}
         onChange={this.handleClick}
         showLabels
-        className={classes.root}
+        className={classes.root + " " + cssstyles.footer}
       >
         <BottomNavigationAction label="我的" icon={<HomeIcon />} />
         <BottomNavigationAction label="聊天室" icon={<GroupIcon />} />

@@ -14,6 +14,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIos from "@material-ui/icons/ArrowBackIos";
+import cssstyles from "../css/app.less";
 
 const styles = {
   root: { height: "3.5rem" },
@@ -42,34 +43,34 @@ class ButtonAppBar extends React.Component {
   render() {
     const { classes, headerState, userState } = this.props;
     return (
-      <div>
-        <AppBar position="static">
-          <Toolbar className={classes.root}>
-            {headerState.backStatus == backStatusType.show && (
-              <IconButton
-                className={classes.menuButton}
-                color="inherit"
-                aria-label="Back"
-                onClick={() => {
-                  this.props.dispatch(headerIndex());
-                  this.props.history.goBack();
-                }}
-              >
-                <ArrowBackIos />
-              </IconButton>
-            )}
-            <div className={classes.grow}>{headerState.title}</div>
-            {!userState.email && (
-              <Button
-                color="inherit"
-                className={classes.login}
-                onClick={this.handelLoginClick}
-              >
-                登陆
-              </Button>
-            )}
+      <AppBar className={cssstyles.header}>
+        {/*position="absolute"*/}
+        <Toolbar className={classes.root}>
+          {headerState.backStatus == backStatusType.show && (
+            <IconButton
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="Back"
+              onClick={() => {
+                this.props.dispatch(headerIndex());
+                this.props.history.goBack();
+              }}
+            >
+              <ArrowBackIos />
+            </IconButton>
+          )}
+          <div className={classes.grow}>{headerState.title}</div>
+          {!userState.email && (
+            <Button
+              color="inherit"
+              className={classes.login}
+              onClick={this.handelLoginClick}
+            >
+              登陆
+            </Button>
+          )}
 
-            {/*userState.email && (
+          {/*userState.email && (
               <Button
                 color="inherit"
                 className={classes.login}
@@ -78,14 +79,13 @@ class ButtonAppBar extends React.Component {
                 登出
               </Button>
             )*/}
-            {userState.email && (
-              <Button color="inherit" className={classes.login}>
-                {userState.nickname}
-              </Button>
-            )}
-          </Toolbar>
-        </AppBar>
-      </div>
+          {userState.email && (
+            <Button color="inherit" className={classes.login}>
+              {userState.nickname}
+            </Button>
+          )}
+        </Toolbar>
+      </AppBar>
     );
   }
 }

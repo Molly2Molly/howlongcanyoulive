@@ -107,6 +107,7 @@
     "redux-thunk": "^2.3.0",
     "sha1": "^1.1.1",
     "typeface-roboto": "0.0.54",
+    "validate.js": "^0.12.0",
     "winston": "^2.3.0"
   }
 }

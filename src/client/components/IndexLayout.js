@@ -37,17 +37,18 @@ class IndexLayout extends React.Component {
     return (
       <React.Fragment>
         <ButtonAppBar />
-        <div className={cssstyles.indexTimePage}>
-          {userState.birthday && (
-            <Route
-              exact
-              path="/"
-              render={props => {
-                return <Timeleft />;
-              }}
-            />
-          )}
-          {/*
+        <div className={cssstyles.centerContainer}>
+          <div>
+            {userState.birthday && (
+              <Route
+                exact
+                path="/"
+                render={props => {
+                  return <Timeleft />;
+                }}
+              />
+            )}
+            {/*
                 <Route exact path="/" component={Timeleft} />
                 <Route path="/user/:userId" component={User} />
                 <PrivateRoute
@@ -57,6 +58,7 @@ class IndexLayout extends React.Component {
                 />
                 <Route path="/todo/:filter?" component={TodoApp} />
               */}
+          </div>
         </div>
         <BottomAppNavigation />
       </React.Fragment>

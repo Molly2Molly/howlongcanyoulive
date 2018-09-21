@@ -32,8 +32,10 @@ class HeadLayout extends React.Component {
     return (
       <React.Fragment>
         <ButtonAppBar />
-        <div className={cssstyles.indexTimePage}>
-          <Route path="/register" component={Register} />
+        <div className={cssstyles.centerContainer}>
+          <div>
+            <Route path="/register" component={Register} />
+          </div>
         </div>
       </React.Fragment>
     );
