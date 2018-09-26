@@ -1,5 +1,7 @@
 var path = require("path");
 var express = require("express");
+var http = require("http");
+var socketio = require("socket.io");
 var session = require("express-session");
 var MongoStore = require("connect-mongo")(session);
 var flash = require("connect-flash");
@@ -155,11 +157,32 @@ app.use(function(err, req, res, next) {
   });
 });
 
+// socket
+var apphttp = http.Server(app);
+var io = socketio(apphttp);
+io.on("connection", function(socket) {
+  console.log("a user connected.");
+  socket.broadcast.emit("connection", { some: "data" });
+
+  socket.on("disconnect", function() {
+    console.log("a user disconnected");
+    io.emit("disconnect", "bye");
+  });
+
+  socket.on("chat message", function(msg) {
+    console.log("receive: " + msg);
+    socket.emit("chat message", "hello from server");
+  });
+});
+
 if (module.parent) {
   module.exports = app;
 } else {
   // 监听端口，启动程序
-  app.listen(config.port, function() {
+  // app.listen(config.port, function() {
+  //   console.log(`${pkg.name} listening on port ${config.port}`);
+  // });
+  apphttp.listen(config.port, function() {
     console.log(`${pkg.name} listening on port ${config.port}`);
   });
 }
