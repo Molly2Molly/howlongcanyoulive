@@ -7,17 +7,17 @@ import "./css/index.less";
 import App from "./App.js";
 import io from "socket.io-client";
 
-const socket = io("http://localhost:5000");
-socket.emit("chat message", "hello from client");
-socket.on("connection", function(data) {
-  console.log("connection: " + JSON.stringify(data));
-});
-socket.on("disconnect", function(data) {
-  console.log("disconnect: " + JSON.stringify(data));
-});
-socket.on("chat message", function(msg) {
-  console.log("receive: " + msg);
-});
+// const socket = io("http://localhost:5000");
+// socket.emit("chat message", "hello from client");
+// socket.on("connection", function(data) {
+//   console.log("connection: " + JSON.stringify(data));
+// });
+// socket.on("disconnect", function(data) {
+//   console.log("disconnect: " + JSON.stringify(data));
+// });
+// socket.on("chat message", function(msg) {
+//   console.log("receive: " + msg);
+// });
 
 window.Promise = Promise;
 

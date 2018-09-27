@@ -1,10 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
 import { withStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import HomeIcon from "@material-ui/icons/Home";
 import GroupIcon from "@material-ui/icons/Group";
+import { headerBackAndTitle } from "../actions/HeaderAction";
 import cssstyles from "../css/app.less";
 
 const styles = {
@@ -14,38 +17,54 @@ const styles = {
 class Footer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: 0
-    };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(event, value) {
-    this.setState({ value }, function() {
-      console.log(this.state.value);
-    });
+    switch (value) {
+      case "index":
+        this.props.history.push("/");
+        break;
+      default:
+        this.props.dispatch(headerBackAndTitle(value));
+        this.props.history.push("/" + value);
+    }
   }
 
   render() {
     const { classes } = this.props;
-    const { value } = this.state;
 
     return (
       <BottomNavigation
-        value={value}
         onChange={this.handleClick}
         showLabels
         className={classes.root + " " + cssstyles.footer}
       >
-        <BottomNavigationAction label="我的" icon={<HomeIcon />} />
-        <BottomNavigationAction label="聊天室" icon={<GroupIcon />} />
+        <BottomNavigationAction
+          label="我的"
+          value="index"
+          icon={<HomeIcon />}
+        />
+        <BottomNavigationAction
+          label="聊天室"
+          value="chat"
+          icon={<GroupIcon />}
+        />
       </BottomNavigation>
     );
   }
 }
 
 Footer.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Footer);
+function mapStateToProps(state) {
+  const { userState } = state;
+  return { userState };
+}
+
+export default withRouter(connect(mapStateToProps)(withStyles(styles)(Footer)));

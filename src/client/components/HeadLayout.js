@@ -6,6 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 import cssstyles from "../css/app.less";
 import Header from "./Header";
 import Register from "./Register";
+import Chat from "./Chat";
 import {} from "../actions/HeaderAction";
 
 const styles = {
@@ -34,6 +35,7 @@ class HeadLayout extends React.Component {
         <Header />
         <div className={cssstyles.centerContainer}>
           <div>
+            <Route path="/chat" component={Chat} />
             <Route path="/register" component={Register} />
           </div>
         </div>

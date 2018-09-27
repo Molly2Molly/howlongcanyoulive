@@ -65,6 +65,7 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={IndexLayout} />
               <Route path="/register" component={HeadLayout} />
+              <Route path="/chat" component={HeadLayout} />
               <Route component={NoMatch} />
               {/*
                 <Route path="/user/:userId" component={User} />
