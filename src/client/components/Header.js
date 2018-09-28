@@ -2,8 +2,6 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { openLoginDialog, logoutUser } from "../actions/UserAction";
-// import { backStatusType, titleType } from "../actions/HeaderAction";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -13,7 +11,7 @@ import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIos from "@material-ui/icons/ArrowBackIos";
-
+import { openLoginDialog, logoutUser } from "../actions/UserAction";
 import cssstyles from "../css/app.less";
 
 const styles = {
@@ -63,7 +61,6 @@ class Header extends React.Component {
       title: titleType.default
     };
     // 不同路径显示不同状态的header
-    console.log(mapRouterToHeader[this.props.location.pathname]);
     if (mapRouterToHeader[this.props.location.pathname]) {
       this.state.backStatus =
         mapRouterToHeader[this.props.location.pathname].backStatus;
@@ -83,9 +80,7 @@ class Header extends React.Component {
     const that = this;
     this.props.dispatch(
       logoutUser(function() {
-        // that.setState({
-        //   openDrawer: false
-        // });
+        that.props.history.push("/");
       })
     );
   }

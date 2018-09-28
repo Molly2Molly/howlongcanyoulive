@@ -7,7 +7,8 @@ import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import HomeIcon from "@material-ui/icons/Home";
 import GroupIcon from "@material-ui/icons/Group";
-// import { headerBackAndTitle } from "../actions/HeaderAction";
+import { openAlert } from "../actions/AlertAction";
+import { openLoginDialog } from "../actions/UserAction";
 import cssstyles from "../css/app.less";
 
 const styles = {
@@ -21,14 +22,23 @@ class Footer extends React.Component {
   }
 
   handleClick(event, value) {
+    const { dispatch, history } = this.props;
     switch (value) {
       case "index":
-        this.props.history.push("/");
+        history.push("/");
         break;
-      // case "chat":
-      //   this.props.dispatch(headerBackAndTitle("聊天室"));
+      case "chat":
+        // not login
+        if (!this.props.userState.email) {
+          // dispatch(
+          //   openAlert("请先登录", function() {
+          dispatch(openLoginDialog());
+          //   })
+          // );
+          break;
+        }
       default:
-        this.props.history.push("/" + value);
+        history.push("/" + value);
     }
   }
 
@@ -58,6 +68,7 @@ class Footer extends React.Component {
 
 Footer.propTypes = {
   classes: PropTypes.object.isRequired,
+  userState: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired

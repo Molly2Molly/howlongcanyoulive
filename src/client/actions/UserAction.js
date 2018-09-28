@@ -3,7 +3,6 @@ import axios from "axios";
 import config from "../../../config";
 import { openLoading, closeLoading } from "./LoadingAction";
 import { openAlert } from "./AlertAction";
-// import { headerIndex } from "./HeaderAction";
 
 export const userActionType = {
   OPENLOGINDIALOG: "OPENLOGINDIALOG",
@@ -75,7 +74,6 @@ export function registerUser(
             dispatch(closeLoading());
             dispatch(
               openAlert("注册成功", function() {
-                //dispatch(headerIndex());
                 history.push("/");
               })
             );
@@ -127,7 +125,6 @@ export function loginUser(history, email, password) {
             dispatch(closeLoginDialog());
             dispatch(
               openAlert("登陆成功", function() {
-                //dispatch(headerIndex());
                 history.push("/");
               })
             );

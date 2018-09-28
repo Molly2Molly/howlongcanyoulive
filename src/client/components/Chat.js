@@ -8,7 +8,8 @@ import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
-import { closeLoginDialog, registerUser } from "../actions/UserAction";
+import { openAlert } from "../actions/AlertAction";
+import { openLoginDialog } from "../actions/UserAction";
 import cssstyles from "../css/app.less";
 
 const styles = theme => ({
@@ -25,6 +26,16 @@ const styles = theme => ({
 class Chat extends React.Component {
   constructor(props) {
     super(props);
+    const { dispatch, history } = this.props;
+    // not login
+    if (!this.props.userState.email) {
+      dispatch(
+        openAlert("请先登录", function() {
+          history.push("/");
+          dispatch(openLoginDialog());
+        })
+      );
+    }
   }
 
   componentDidMount() {}
