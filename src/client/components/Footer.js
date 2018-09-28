@@ -7,7 +7,7 @@ import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import HomeIcon from "@material-ui/icons/Home";
 import GroupIcon from "@material-ui/icons/Group";
-import { headerBackAndTitle } from "../actions/HeaderAction";
+// import { headerBackAndTitle } from "../actions/HeaderAction";
 import cssstyles from "../css/app.less";
 
 const styles = {
@@ -25,8 +25,8 @@ class Footer extends React.Component {
       case "index":
         this.props.history.push("/");
         break;
-      case "chat":
-        this.props.dispatch(headerBackAndTitle("聊天室"));
+      // case "chat":
+      //   this.props.dispatch(headerBackAndTitle("聊天室"));
       default:
         this.props.history.push("/" + value);
     }

@@ -7,7 +7,6 @@ import cssstyles from "../css/app.less";
 import Header from "./Header";
 import Register from "./Register";
 import Chat from "./Chat";
-import {} from "../actions/HeaderAction";
 
 const styles = {
   root: {},
@@ -45,8 +44,8 @@ class HeadLayout extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { headerState } = state;
-  return { headerState };
+  const { userState } = state;
+  return { userState };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -55,7 +54,7 @@ function mapDispatchToProps(dispatch) {
 
 HeadLayout.propTypes = {
   classes: PropTypes.object.isRequired,
-  headerState: PropTypes.object.isRequired
+  userState: PropTypes.object.isRequired
 };
 
 export default connect(

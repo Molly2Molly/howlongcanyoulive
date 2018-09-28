@@ -5,7 +5,6 @@ import todos from "./TodoReducer";
 import visibilityFilter from "./VisibilityFilterReducer";
 import { selectedSubreddit, postsBySubreddit } from "./RedditReducer";
 import userState from "./UserReducer";
-import headerState from "./HeaderReducer";
 import loadingState from "./LoadingReducer";
 import alertState from "./AlertReducer";
 
@@ -18,7 +17,6 @@ const rootReducer = combineReducers({
   selectedSubreddit,
   postsBySubreddit,
   userState,
-  headerState,
   loadingState,
   alertState
 });

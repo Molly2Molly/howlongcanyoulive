@@ -3,11 +3,7 @@ import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { openLoginDialog, logoutUser } from "../actions/UserAction";
-import {
-  backStatusType,
-  loginStatusType,
-  headerIndex
-} from "../actions/HeaderAction";
+// import { backStatusType, titleType } from "../actions/HeaderAction";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -17,6 +13,7 @@ import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIos from "@material-ui/icons/ArrowBackIos";
+
 import cssstyles from "../css/app.less";
 
 const styles = {
@@ -33,12 +30,46 @@ const styles = {
   }
 };
 
+const backStatusType = {
+  hide: "hide",
+  show: "show"
+};
+
+const titleType = {
+  default: "How Long Can You Live"
+};
+
+const mapRouterToHeader = {
+  "/": {
+    backStatus: backStatusType.hide,
+    title: titleType.default
+  },
+  "/register": {
+    backStatus: backStatusType.show,
+    title: "注册"
+  },
+  "/chat": {
+    backStatus: backStatusType.show,
+    title: "聊天室"
+  }
+};
+
 class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      openDrawer: false
+      openDrawer: false,
+      backStatus: backStatusType.hide,
+      title: titleType.default
     };
+    // 不同路径显示不同状态的header
+    console.log(mapRouterToHeader[this.props.location.pathname]);
+    if (mapRouterToHeader[this.props.location.pathname]) {
+      this.state.backStatus =
+        mapRouterToHeader[this.props.location.pathname].backStatus;
+      this.state.title = mapRouterToHeader[this.props.location.pathname].title;
+    }
+
     this.handelLoginClick = this.handelLoginClick.bind(this);
     this.handlerLogoutClick = this.handlerLogoutClick.bind(this);
     this.toggleDrawer = this.toggleDrawer.bind(this);
@@ -74,25 +105,24 @@ class Header extends React.Component {
   }
 
   render() {
-    const { classes, headerState, userState } = this.props;
+    const { classes, userState } = this.props;
     return (
       <AppBar className={cssstyles.header}>
         {/*position="absolute"*/}
         <Toolbar className={classes.root}>
-          {headerState.backStatus == backStatusType.show && (
+          {this.state.backStatus == backStatusType.show && (
             <IconButton
               className={classes.menuButton}
               color="inherit"
               aria-label="Back"
               onClick={() => {
-                this.props.dispatch(headerIndex());
                 this.props.history.goBack();
               }}
             >
               <ArrowBackIos />
             </IconButton>
           )}
-          <div className={classes.grow}>{headerState.title}</div>
+          <div className={classes.grow}>{this.state.title}</div>
           {!userState.email && (
             <Button
               color="inherit"
@@ -149,14 +179,16 @@ class Header extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { userState, headerState } = state;
-  return { userState, headerState };
+  const { userState } = state;
+  return { userState };
 }
 
 Header.propTypes = {
   classes: PropTypes.object.isRequired,
   userState: PropTypes.object.isRequired,
-  headerState: PropTypes.object.isRequired
+  match: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 
 export default withRouter(connect(mapStateToProps)(withStyles(styles)(Header)));

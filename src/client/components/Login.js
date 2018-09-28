@@ -13,7 +13,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { closeLoginDialog, loginUser } from "../actions/UserAction";
-import { headerBackAndTitle } from "../actions/HeaderAction";
+// import { headerBackAndTitle } from "../actions/HeaderAction";
 import cssstyles from "../css/app.less";
 
 const styles = theme => ({
@@ -46,7 +46,7 @@ class Login extends React.Component {
 
   gotoRegister(e) {
     //e.preventDefault();
-    this.props.dispatch(headerBackAndTitle("注册"));
+    //this.props.dispatch(headerBackAndTitle("注册"));
     this.props.dispatch(closeLoginDialog());
     //this.props.history.push("/register");
   }
