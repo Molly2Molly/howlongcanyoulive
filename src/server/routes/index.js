@@ -8,7 +8,7 @@ module.exports = function(app) {
     );
     res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
     res.header("X-Powered-By", " 4.16.3");
-    res.header("Content-Type", "application/json;charset=utf-8");
+    //res.header("Content-Type", "application/json;charset=utf-8");
     next();
   });
 

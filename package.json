@@ -10,7 +10,7 @@
   "scripts": {
     "clientstart": "webpack-dev-server --hot --mode development --open --color --config webpack.dev.js",
     "clientbuild": "webpack --mode production  --optimize-minimize --config webpack.prod.js",
-    "serverstart": "nodemon src/server/index.js --exec babel-node --presets env",
+    "serverstart": "nodemon src/server/index.js --exec babel-node --presets env,react",
     "serverbuild": "npx babel src/server -d dist/server --no-babelrc --presets env,react --copy-files --plugins=transform-object-rest-spread",
     "pm2start": "set NODE_ENV=production && pm2 start dist/server/index.js --node-args='--harmony'",
     "pm2restart": "set NODE_ENV=production && pm2 restart dist/server/index.js --node-args='--harmony'",

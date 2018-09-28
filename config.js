@@ -9,5 +9,5 @@ module.exports = {
 
   // http://localhost:5000
   // http://45.40.57.78:5000
-  serverBaseUrl: "http://45.40.57.78:5000"
+  serverBaseUrl: "http://localhost:5000"
 };
