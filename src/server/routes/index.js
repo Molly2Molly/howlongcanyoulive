@@ -14,7 +14,7 @@ module.exports = function(app) {
 
   app.get("/", function(req, res) {
     //res.redirect("/posts");
-    res.render("index");
+    res.type("html").render("index");
   });
   // app.use("/signup", require("./signup"));
   // app.use("/signin", require("./signin"));

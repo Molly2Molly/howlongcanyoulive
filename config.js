@@ -8,5 +8,5 @@ module.exports = {
   mediaQuery: false, // (Boolean) Allow px to be converted in media queries.
 
   //http://localhost:5000
-  serverBaseUrl: "http://localhost:5000"
+  serverBaseUrl: "http://45.40.57.78:5000"
 };
