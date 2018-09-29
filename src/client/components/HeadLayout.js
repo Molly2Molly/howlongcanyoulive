@@ -34,8 +34,10 @@ class HeadLayout extends React.Component {
         <Header />
         <div className={cssstyles.centerContainer}>
           <div>
-            <Route path="/chat" component={Chat} />
-            <Route path="/register" component={Register} />
+            <Switch>
+              <Route path="/chat" component={Chat} />
+              <Route path="/register" component={Register} />
+            </Switch>
           </div>
         </div>
       </React.Fragment>

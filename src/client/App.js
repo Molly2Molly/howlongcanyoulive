@@ -17,6 +17,7 @@ import LoginHigherOrder from "./components/LoginHigherOrder";
 import Login from "./components/Login";
 import Loading from "./components/Loading";
 import Alert from "./components/Alert";
+import NoMatch from "./components/NoMatch";
 
 const theme = createMuiTheme({
   palette: {
@@ -68,9 +69,10 @@ class App extends React.Component {
               <Route path="/register" component={HeadLayout} />
               {/* Login Higher Order Component */}
               <Route
+                path="/chat"
                 render={props => (
                   <LoginHigherOrder>
-                    <Route path="/chat" component={HeadLayout} />
+                    <Route component={HeadLayout} />
                   </LoginHigherOrder>
                 )}
               />
@@ -105,35 +107,23 @@ class App extends React.Component {
   }
 }
 
-class User extends React.Component {
-  componentDidMount() {
-    console.log(this.props);
-    console.log(this.props.match);
-    console.log(this.props.location);
-    console.log(this.props.history);
-  }
-  render() {
-    return (
-      <div className="User">
-        <Link to="/">Back</Link>
-        <br />
-        User {this.props.match.params.userId}
-      </div>
-    );
-  }
-}
-
-class NoMatch extends React.Component {
-  render() {
-    return (
-      <div className="NoMatch">
-        <Link to="/">Back</Link>
-        <br />
-        NoMatch
-      </div>
-    );
-  }
-}
+// class User extends React.Component {
+//   componentDidMount() {
+//     console.log(this.props);
+//     console.log(this.props.match);
+//     console.log(this.props.location);
+//     console.log(this.props.history);
+//   }
+//   render() {
+//     return (
+//       <div className="User">
+//         <Link to="/">Back</Link>
+//         <br />
+//         User {this.props.match.params.userId}
+//       </div>
+//     );
+//   }
+// }
 
 function mapStateToProps(state) {
   const { loadingState, alertState } = state;
