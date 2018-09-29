@@ -1,4 +1,5 @@
-var config = require("config-lite")(__dirname);
+//var config = require("config-lite")(__dirname);
+var config = require("../../../config");
 var mongoose = require("mongoose");
 var uniqueValidator = require("mongoose-unique-validator");
 
