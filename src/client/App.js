@@ -20,6 +20,7 @@ import Alert from "./components/Alert";
 import NoMatch from "./components/NoMatch";
 import Register from "./components/Register";
 import Chat from "./components/Chat";
+import { GlobalContext } from "./Context";
 
 const theme = createMuiTheme({
   palette: {
@@ -76,16 +77,21 @@ class App extends React.Component {
                   </HeadLayout>
                 )}
               />
-              <Route
-                path="/chat"
-                render={props => (
-                  <LoginHigherOrder>
-                    <HeadLayout>
-                      <Chat />
-                    </HeadLayout>
-                  </LoginHigherOrder>
+              <GlobalContext.Consumer>
+                {context => (
+                  <Route
+                    path="/chat"
+                    render={props => (
+                      <LoginHigherOrder>
+                        <HeadLayout>
+                          <Chat socket={context.socket} />
+                        </HeadLayout>
+                      </LoginHigherOrder>
+                    )}
+                  />
                 )}
-              />
+              </GlobalContext.Consumer>
+
               <Route component={NoMatch} />
               {/*
                 <Route path="/user/:userId" component={User} />

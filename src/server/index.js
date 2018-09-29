@@ -163,16 +163,16 @@ var apphttp = http.Server(app);
 var io = socketio(apphttp);
 io.on("connection", function(socket) {
   console.log("a user connected.");
-  socket.broadcast.emit("connection", { some: "data" });
+  socket.broadcast.emit("connection", "a user connected.");
 
   socket.on("disconnect", function() {
     console.log("a user disconnected");
-    io.emit("disconnect", "bye");
+    io.emit("disconnect", "a user disconnected.");
   });
 
   socket.on("chat message", function(msg) {
     console.log("receive: " + msg);
-    socket.emit("chat message", "hello from server");
+    socket.emit("chat message", "server return : " + msg);
   });
 });
 

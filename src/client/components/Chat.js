@@ -24,6 +24,7 @@ const styles = theme => ({
 class Chat extends React.Component {
   constructor(props) {
     super(props);
+    this.props.socket.emit("chat message", "run into chatroom");
   }
 
   componentDidMount() {}
@@ -44,7 +45,8 @@ Chat.propTypes = {
   userState: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  socket: PropTypes.object.isRequired
 };
 
 export default withRouter(connect(mapStateToProps)(withStyles(styles)(Chat)));

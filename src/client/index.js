@@ -5,19 +5,7 @@ import configureStore from "./configureStore";
 import "typeface-roboto";
 import "./css/index.less";
 import App from "./App.js";
-import io from "socket.io-client";
-
-// const socket = io("http://localhost:5000");
-// socket.emit("chat message", "hello from client");
-// socket.on("connection", function(data) {
-//   console.log("connection: " + JSON.stringify(data));
-// });
-// socket.on("disconnect", function(data) {
-//   console.log("disconnect: " + JSON.stringify(data));
-// });
-// socket.on("chat message", function(msg) {
-//   console.log("receive: " + msg);
-// });
+import { GlobalContext, globalContextObject } from "./Context";
 
 window.Promise = Promise;
 
@@ -42,7 +30,9 @@ const store = configureStore(preloadedState);
 const renderApp = () => {
   renderFunc(
     <Provider store={store}>
-      <App store={store} />
+      <GlobalContext.Provider value={globalContextObject}>
+        <App store={store} />
+      </GlobalContext.Provider>
     </Provider>,
     document.getElementById("root")
   );
