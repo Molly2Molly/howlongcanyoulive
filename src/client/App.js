@@ -18,6 +18,8 @@ import Login from "./components/Login";
 import Loading from "./components/Loading";
 import Alert from "./components/Alert";
 import NoMatch from "./components/NoMatch";
+import Register from "./components/Register";
+import Chat from "./components/Chat";
 
 const theme = createMuiTheme({
   palette: {
@@ -66,13 +68,21 @@ class App extends React.Component {
           >
             <Switch>
               <Route exact path="/" component={IndexLayout} />
-              <Route path="/register" component={HeadLayout} />
-              {/* Login Higher Order Component */}
+              <Route
+                path="/register"
+                render={props => (
+                  <HeadLayout>
+                    <Register />
+                  </HeadLayout>
+                )}
+              />
               <Route
                 path="/chat"
                 render={props => (
                   <LoginHigherOrder>
-                    <Route component={HeadLayout} />
+                    <HeadLayout>
+                      <Chat />
+                    </HeadLayout>
                   </LoginHigherOrder>
                 )}
               />

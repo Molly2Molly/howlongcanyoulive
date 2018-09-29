@@ -5,8 +5,6 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import cssstyles from "../css/app.less";
 import Header from "./Header";
-import Register from "./Register";
-import Chat from "./Chat";
 
 const styles = {
   root: {},
@@ -33,12 +31,7 @@ class HeadLayout extends React.Component {
       <React.Fragment>
         <Header />
         <div className={cssstyles.centerContainer}>
-          <div>
-            <Switch>
-              <Route path="/chat" component={Chat} />
-              <Route path="/register" component={Register} />
-            </Switch>
-          </div>
+          <div>{this.props.children}</div>
         </div>
       </React.Fragment>
     );
