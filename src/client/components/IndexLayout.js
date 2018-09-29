@@ -48,16 +48,6 @@ class IndexLayout extends React.Component {
                 }}
               />
             )}
-            {/*
-                <Route exact path="/" component={Timeleft} />
-                <Route path="/user/:userId" component={User} />
-                <PrivateRoute
-                  path="/counter"
-                  component={CounterApp}
-                  store={this.props.store}
-                />
-                <Route path="/todo/:filter?" component={TodoApp} />
-              */}
           </div>
         </div>
         <Footer />
