@@ -7,8 +7,6 @@ import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import HomeIcon from "@material-ui/icons/Home";
 import GroupIcon from "@material-ui/icons/Group";
-import { openAlert } from "../actions/AlertAction";
-import { openLoginDialog } from "../actions/UserAction";
 import cssstyles from "../css/app.less";
 
 const styles = {
@@ -23,23 +21,7 @@ class Footer extends React.Component {
 
   handleClick(event, value) {
     const { dispatch, history } = this.props;
-    switch (value) {
-      case "index":
-        history.push("/");
-        break;
-      case "chat":
-        // not login
-        if (!this.props.userState.email) {
-          // dispatch(
-          //   openAlert("请先登录", function() {
-          dispatch(openLoginDialog());
-          //   })
-          // );
-          break;
-        }
-      default:
-        history.push("/" + value);
-    }
+    history.push("/" + value);
   }
 
   render() {
@@ -51,11 +33,7 @@ class Footer extends React.Component {
         showLabels
         className={classes.root + " " + cssstyles.footer}
       >
-        <BottomNavigationAction
-          label="我的"
-          value="index"
-          icon={<HomeIcon />}
-        />
+        <BottomNavigationAction label="我的" value="" icon={<HomeIcon />} />
         <BottomNavigationAction
           label="聊天室"
           value="chat"

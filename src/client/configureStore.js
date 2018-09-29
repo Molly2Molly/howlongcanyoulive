@@ -22,7 +22,6 @@ export default function configureStore(preloadedState) {
     middlewares.push(loggerMilddleware);
   }
   let middlewareEnhancer = applyMiddleware(...middlewares);
-
   let enhancers = [middlewareEnhancer];
   if (process.env.NODE_ENV === "development") {
     enhancers.push(monitorReducerEnhancer);

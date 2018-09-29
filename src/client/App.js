@@ -13,6 +13,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import IndexLayout from "./components/IndexLayout";
 import HeadLayout from "./components/HeadLayout";
+import LoginHigherOrder from "./components/LoginHigherOrder";
 import Login from "./components/Login";
 import Loading from "./components/Loading";
 import Alert from "./components/Alert";
@@ -65,7 +66,14 @@ class App extends React.Component {
             <Switch>
               <Route exact path="/" component={IndexLayout} />
               <Route path="/register" component={HeadLayout} />
-              <Route path="/chat" component={HeadLayout} />
+              {/* Login Higher Order Component */}
+              <Route
+                render={props => (
+                  <LoginHigherOrder>
+                    <Route path="/chat" component={HeadLayout} />
+                  </LoginHigherOrder>
+                )}
+              />
               <Route component={NoMatch} />
               {/*
                 <Route path="/user/:userId" component={User} />
