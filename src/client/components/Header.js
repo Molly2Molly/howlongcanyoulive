@@ -11,7 +11,8 @@ import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowBackIos from "@material-ui/icons/ArrowBackIos";
-import { openLoginDialog, logoutUser } from "../actions/UserAction";
+//import { openLoginDialog, logoutUser } from "../actions/UserAction";
+import { logoutUser } from "../actions/UserAction";
 import cssstyles from "../css/app.less";
 
 const styles = {
@@ -73,7 +74,10 @@ class Header extends React.Component {
   }
 
   handelLoginClick() {
-    this.props.dispatch(openLoginDialog());
+    const that = this;
+    import("../actions/UserAction").then(({ openLoginDialog }) => {
+      that.props.dispatch(openLoginDialog());
+    });
   }
 
   handlerLogoutClick() {
