@@ -124,6 +124,8 @@
   -ms-flex: 1;
   flex: 1;
   overflow-y: scroll;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
 }
 .chatroom > div:nth-child(2) {
   display: -webkit-box;
@@ -153,6 +155,7 @@
   -moz-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  color: #666;
 }
 .chatroom .chatitem > div:nth-child(1) > span:nth-child(1) {
   -webkit-box-flex: 0;
@@ -178,4 +181,9 @@
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
   color: #999;
+}
+.chatroom .chatitem > div:nth-child(2) {
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
 }

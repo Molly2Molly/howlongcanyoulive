@@ -158,9 +158,9 @@ app.use(function(err, req, res, next) {
   });
 });
 
-// socket
-var apphttp = http.Server(app);
-var io = socketio(apphttp);
+// socket.io
+var apphttpserver = http.Server(app);
+var io = socketio(apphttpserver);
 io.on("connection", function(socket) {
   console.log("a user connected.");
   socket.broadcast.emit("connection", "a user connected.");
@@ -170,9 +170,9 @@ io.on("connection", function(socket) {
     io.emit("disconnect", "a user disconnected.");
   });
 
-  socket.on("chat message", function(msg) {
-    console.log("receive: " + msg);
-    socket.emit("chat message", "server return : " + msg);
+  socket.on("message", function(msg) {
+    console.log("receive message : " + msg);
+    socket.broadcast.emit("message", msg);
   });
 });
 
@@ -183,7 +183,7 @@ if (module.parent) {
   // app.listen(config.port, function() {
   //   console.log(`${pkg.name} listening on port ${config.port}`);
   // });
-  apphttp.listen(config.port, function() {
+  apphttpserver.listen(config.port, function() {
     console.log(`${pkg.name} listening on port ${config.port}`);
   });
 }

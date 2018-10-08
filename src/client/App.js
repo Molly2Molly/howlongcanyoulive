@@ -84,7 +84,7 @@ class App extends React.Component {
                     render={props => (
                       <LoginHigherOrder>
                         <HeadLayout>
-                          <Chat socket={context.socket} />
+                          <Chat />
                         </HeadLayout>
                       </LoginHigherOrder>
                     )}

@@ -106,6 +106,7 @@
   > div:nth-child(1) {
     flex: 1;
     overflow-y: scroll;
+    transition: all 0.3s ease-in;
   }
   > div:nth-child(2) {
     display: flex;
@@ -120,6 +121,7 @@
     > div:nth-child(1) {
       display: flex;
       align-items: center;
+      color: #666;
       > span:nth-child(1) {
         flex: 0 0 auto;
       }
@@ -133,6 +135,11 @@
         flex: 0 0 auto;
         color: #999;
       }
+    }
+    > div:nth-child(2) {
+      width: 100%;
+      word-wrap: break-word;
+      word-break: break-all;
     }
   }
 }
