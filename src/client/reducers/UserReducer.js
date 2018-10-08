@@ -1,5 +1,8 @@
 import { userActionType } from "../actions/UserAction";
-import { localStorageSession } from "../../../public/libs/utils";
+import {
+  localStorageSession,
+  getRandomColor
+} from "../../../public/libs/utils";
 
 // Object.assign({}, state, {visibilityFilter: action.filter})
 // { ...state, ...newState }
@@ -12,7 +15,8 @@ const defaultUserState = {
   password: initUser ? initUser.password : "",
   nickname: initUser ? initUser.nickname : "",
   birthday: initUser ? initUser.birthday : "",
-  sex: initUser ? initUser.sex : ""
+  sex: initUser ? initUser.sex : "",
+  bgcolor: getRandomColor()
 };
 
 export default (state = defaultUserState, action) => {
@@ -43,7 +47,8 @@ export default (state = defaultUserState, action) => {
         password: "",
         nickname: "",
         birthday: "",
-        sex: ""
+        sex: "",
+        bgcolor: getRandomColor()
       };
     default:
       return state;

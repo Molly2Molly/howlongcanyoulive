@@ -5,19 +5,22 @@ import moment from "moment";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { withStyles } from "@material-ui/core/styles";
+import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import MenuItem from "@material-ui/core/MenuItem";
 import cssstyles from "../css/app.less";
 
 const styles = theme => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap"
+  chatroom: {
+    fontSize: "14px"
   },
-  textField: {
-    //marginLeft: theme.spacing.unit,
-    //marginRight: theme.spacing.unit
+  chatitem: {
+    marginBottom: "10px"
+  },
+  chatdot: {
+    width: "10px",
+    height: "10px",
+    marginRight: "10px",
+    borderRadius: "50%"
   }
 });
 
@@ -31,7 +34,46 @@ class Chat extends React.Component {
 
   render() {
     const { classes, userState } = this.props;
-    return <React.Fragment>Chat</React.Fragment>;
+    return (
+      <div className={cssstyles.chatroom + " " + classes.chatroom}>
+        <div>
+          <div className={cssstyles.chatitem + " " + classes.chatitem}>
+            <div>
+              <span
+                className={classes.chatdot}
+                style={{ backgroundColor: userState.bgcolor }}
+              />
+              TESTUSERNAME&nbsp;&nbsp;进入了聊天室
+            </div>
+          </div>
+          <div className={cssstyles.chatitem + " " + classes.chatitem}>
+            <div>
+              <span
+                className={classes.chatdot}
+                style={{ backgroundColor: userState.bgcolor }}
+              />
+              <span>TESTUSERNAMETESTUSERNAMETESTUSERNAMETESTUSERNAME</span>
+              <span>10月8 10:52</span>
+            </div>
+            <div>
+              吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧啦吧吧啦吧啦吧啦吧啦吧
+            </div>
+          </div>
+        </div>
+        <div>
+          <Input
+            defaultValue=""
+            inputProps={{
+              "aria-label": "说点什么...",
+              placeholder: "说点什么..."
+            }}
+          />
+          <Button variant="contained" color="primary">
+            发送
+          </Button>
+        </div>
+      </div>
+    );
   }
 }
 

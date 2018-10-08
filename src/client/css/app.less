@@ -18,6 +18,7 @@
   overflow-y: scroll;
   > div {
     padding: @gap;
+    height: 100%;
   }
 }
 
@@ -35,8 +36,8 @@
 }
 
 .drawerRight {
-  width:300px;
-  text-align:center;
+  width: 300px;
+  text-align: center;
 }
 
 .timeleft {
@@ -96,4 +97,42 @@
 
 .button {
   margin-top: @gap!important;
+}
+
+.chatroom {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  > div:nth-child(1) {
+    flex: 1;
+    overflow-y: scroll;
+  }
+  > div:nth-child(2) {
+    display: flex;
+    width: 100%;
+    margin-top: @gap;
+    > div:nth-child(1) {
+      flex: 1;
+      margin-right: @gap;
+    }
+  }
+  .chatitem {
+    > div:nth-child(1) {
+      display: flex;
+      align-items: center;
+      > span:nth-child(1) {
+        flex: 0 0 auto;
+      }
+      > span:nth-child(2) {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      > span:nth-child(3) {
+        flex: 0 0 auto;
+        color: #999;
+      }
+    }
+  }
 }
