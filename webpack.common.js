@@ -85,7 +85,6 @@ module.exports = {
   plugins: [
     cleanPlugin,
     htmlPlugin,
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin()
   ]
 };
